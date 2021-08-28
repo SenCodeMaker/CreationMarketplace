@@ -61,8 +61,8 @@ function* handleFetchNFTRequest(action: FetchNFTRequestAction) {
   const { contractAddress, tokenId } = action.payload
 
   try {
-    const contract = getContract({ address: contractAddress })
-    const vendor = contract.vendor || VendorName.DECENTRALAND
+    // const contract = getContract({ address: contractAddress })
+    const vendor = /*contract.vendor ||*/ VendorName.SPECIES
 
     const { nftService } = VendorFactory.build(vendor)
 

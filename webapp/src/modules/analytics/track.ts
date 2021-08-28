@@ -23,9 +23,11 @@ import {
   EXECUTE_ORDER_SUCCESS,
   CREATE_ORDER_SUCCESS,
   CANCEL_ORDER_SUCCESS,
+  BuyOrderSuccessAction,
   ExecuteOrderSuccessAction,
   CreateOrderSuccessAction,
-  CancelOrderSuccessAction
+  CancelOrderSuccessAction,
+  BUY_ORDER_SUCCESS
 } from '../order/actions'
 import {
   TRANSFER_NFT_SUCCESS,
@@ -59,9 +61,21 @@ function withCategory(eventName: string, item: { category: string }) {
   return `${eventName} ${category}`
 }
 
+track<BuyOrderSuccessAction>(
+  BUY_ORDER_SUCCESS,
+  ({ payload }) => withCategory('Buy', payload.nft),
+  ({ payload }) => ({
+    category: payload.nft.category,
+    time: Date.now(),
+    nft: payload.nft.id,
+    price: payload.order.price,
+    buyer: payload.order.buyer
+  })
+)
+
 track<ExecuteOrderSuccessAction>(
   EXECUTE_ORDER_SUCCESS,
-  ({ payload }) => withCategory('Buy', payload.nft),
+  ({ payload }) => withCategory('Trade', payload.nft),
   ({ payload }) => ({
     category: payload.nft.category,
     nft: payload.nft.id,

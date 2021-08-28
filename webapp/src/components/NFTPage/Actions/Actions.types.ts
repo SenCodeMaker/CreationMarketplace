@@ -1,7 +1,7 @@
-import { Wallet } from 'decentraland-dapps/dist/modules//wallet/types'
 import { NFT } from '../../../modules/nft/types'
 import { Order } from '../../../modules/order/types'
 import { Bid } from '../../../modules/bid/types'
+import { Wallet } from '../../../modules/authorization/types'
 
 export type Props = {
   wallet: Wallet | null

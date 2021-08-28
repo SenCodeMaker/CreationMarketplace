@@ -1,17 +1,16 @@
 import { Dispatch } from 'redux'
 import { CallHistoryMethodAction } from 'connected-react-router'
-import { Authorization } from 'decentraland-dapps/dist/modules/authorization/types'
-import { Wallet } from 'decentraland-dapps/dist/modules/wallet/types'
 import {
-  executeOrderRequest,
-  ExecuteOrderRequestAction
+  buyOrderRequest,
+  BuyOrderRequestAction
 } from '../../modules/order/actions'
+import { Wallet, Authorization } from '../../modules/authorization/types'
 
 export type Props = {
   wallet: Wallet | null
   authorizations: Authorization[]
   isLoading: boolean
-  onExecuteOrder: typeof executeOrderRequest
+  onBuyOrder: typeof buyOrderRequest
   onNavigate: (path: string) => void
 }
 
@@ -19,7 +18,7 @@ export type MapStateProps = Pick<
   Props,
   'wallet' | 'authorizations' | 'isLoading'
 >
-export type MapDispatchProps = Pick<Props, 'onNavigate' | 'onExecuteOrder'>
+export type MapDispatchProps = Pick<Props, 'onNavigate' | 'onBuyOrder'>
 export type MapDispatch = Dispatch<
-  CallHistoryMethodAction | ExecuteOrderRequestAction
+  CallHistoryMethodAction | BuyOrderRequestAction
 >

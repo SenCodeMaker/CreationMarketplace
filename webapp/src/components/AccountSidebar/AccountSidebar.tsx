@@ -2,7 +2,6 @@ import React, { useCallback } from 'react'
 
 import { VendorName } from '../../modules/vendor/types'
 import { Section } from '../../modules/routing/types'
-import { getPartners } from '../../modules/vendor/utils'
 import { VendorMenu } from '../Vendor/VendorMenu'
 import { Props } from './AccountSidebar.types'
 
@@ -16,18 +15,18 @@ const AccountSidebar = (props: Props) => {
     [address, onBrowse]
   )
 
-  const decentraland = VendorName.DECENTRALAND
+  const species = VendorName.SPECIES
 
   return (
     <div className="NFTSidebar">
       <VendorMenu
-        key={decentraland}
+        key={species}
         address={address}
-        vendor={decentraland}
+        vendor={species}
         section={section}
-        onClick={section => handleOnBrowse(decentraland, section)}
+        onClick={section => handleOnBrowse(species, section)}
       />
-      {getPartners().map(partner => (
+      {/* {getPartners().map(partner => (
         <VendorMenu
           key={partner}
           address={address}
@@ -35,7 +34,7 @@ const AccountSidebar = (props: Props) => {
           section={section}
           onClick={section => handleOnBrowse(partner, section)}
         />
-      ))}
+      ))} */}
     </div>
   )
 }

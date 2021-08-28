@@ -6,13 +6,7 @@ export const PAGE_SIZE = 24
 
 export function getMaxQuerySize(vendor: VendorName) {
   switch (vendor) {
-    case VendorName.DECENTRALAND:
-      return MAX_QUERY_SIZE
-    case VendorName.SUPER_RARE:
-      return MAX_QUERY_SIZE
-    case VendorName.MAKERS_PLACE:
-      return MAX_QUERY_SIZE
-    case VendorName.KNOWN_ORIGIN:
+    case VendorName.SPECIES:
       return MAX_QUERY_SIZE
   }
 }

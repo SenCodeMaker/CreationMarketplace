@@ -23,12 +23,14 @@
     "jump_in": "跳转"
   },
   "vendors": {
+    "species": "Species",
     "decentraland": "Decentraland",
     "super_rare": "SuperRare",
     "makers_place": "MakersPlace",
     "known_origin": "KnownOrigin"
   },
   "navigation": {
+    "species": "species",
     "decentraland": "Decentraland",
     "partners": "伙伴",
     "my_assets": "我的资产",
@@ -40,6 +42,14 @@
     "land": "土地",
     "parcels": "地块",
     "estates": "产业",
+    "animalia": "動物",
+    "archaea" : "古細菌",
+    "bacteria" : "バクテリア",
+    "plantae" : "植物",
+    "protozoa" : "原生動物",
+    "fungi" : "Fungus",
+    "chromista" : "クロミスタ",
+    "viruses" : "ウイルス",
     "wearables": "可穿戴",
     "wearables_head": "头部",
     "wearables_eyebrows": "眉毛",
@@ -72,14 +82,23 @@
   "filters": {
     "name": "名称",
     "newest": "最新",
+    "threatStatus": "脅威ステータス",
     "recently_listed": "最新上市",
     "cheapest": "最低价"
   },
   "home_page": {
-    "title": "Decentraland Marketplace",
+    "title": "Species Marketplace",
     "subtitle": "欢迎来到虚拟世界的一站式商店，获取最好的数字资产。",
     "get_started": "开始浏览",
     "learn_more": "学习更多",
+    "home_animalia": "動物",
+    "home_archaea" : "古細菌",
+    "home_bacteria" : "バクテリア",
+    "home_plantae" : "植物",
+    "home_protozoa" : "原生動物",
+    "home_fungi" : "Fungus",
+    "home_chromista" : "クロミスタ",
+    "home_viruses" : "ウイルス",
     "home_wearables": "可穿戴",
     "home_land": "地块和产业",
     "home_ens": "名称"
@@ -102,6 +121,11 @@
     "more_than_results": "+{count} results",
     "search": "搜寻 {suffix}...",
     "search_land": "搜寻...",
+    "threatStatus":"脅威ステータス",
+    "sex":"セックス",
+    "region":"領域",
+    "country":"国",
+    "kingdom":"王国",
     "rarity": "稀有度",
     "gender": "性别",
     "collection": "珍藏",
@@ -129,9 +153,9 @@
     "plaza": "广场",
     "road": "道路",
     "district": "区域",
-    "leaving_decentraland": "离开Decentraland",
-    "leaving_decentraland_description": "您还无法将{vendor}资产发布或更新到Decentraland市场。您是否要继续{vendor_link}在此处发布？",
-    "leaving_decentraland_disclaimer": "您的NFT仍将列在Decentraland市场中"
+    "leaving_species": "离开Species",
+    "leaving_species_description": "種のマーケットプレイスではまだ取引が開始されていません。。您是否要继续{vendor_link}在此处发布？",
+    "leaving_species_disclaimer": "您的NFT仍将列在Species市场中"
   },
   "proximity": {
     "adjacent": "相邻",
@@ -154,6 +178,44 @@
     "when": "时间",
     "price": "价格"
   },
+  "sex":{
+    "male":"男性",
+    "female":"女性",
+    "none":"なし",
+    "hermaphrodite":"雌雄同体"
+  },
+  "kingdom":{
+    "animalia":"動物",
+    "archaea":"古細菌",
+    "bacteria":"バクテリア",
+    "plantae":"植物",
+    "protozoa":"原生動物",
+    "fungi":"菌類",
+    "chromista":"クロミスタ",
+    "viruses":"ウイルス"
+  },
+  "region": {
+    "africa" : "アフリカ",
+    "asia" : "アジア",
+    "europe" : "ヨーロッパ",
+    "north_america" : "北アメリカ",
+    "oceania" : "オセアニア",
+    "latin_america" : "ラテンアメリカ",
+    "antarctica" : "南極大陸"
+  },
+  "threatStatus":{
+    "extinct":"絶滅した",
+    "extinct_in_the_wild": "野生絶滅",
+    "regionally_extinct": "regionally extinct",
+    "critically_endangered":"絶滅危惧種",
+    "endangered":"絶滅危惧種",
+    "vulnerable":"脆弱",
+    "near_threatened": "near Threatened",
+    "least_concern": "最小の懸念",
+    "data_deficient": "データ不足",
+    "not_applicable": "該当なし",
+    "not_evaluated": "評価されていません"
+  },
   "wearable": {
     "body_shape": {
       "male": "男性",
@@ -170,13 +232,13 @@
       "common": "常见"
     },
     "rarity_tooltip": {
-      "unique": "像圣杯一样：独一无二",
-      "mythic": "给幸运的人：最多10个",
-      "legendary": "限量供应：最多100个",
-      "epic": "最大供应量：1000个",
-      "rare": "最大供应量：5000个",
-      "uncommon": "最大供应量：10,000个",
-      "common": "最大供应量：100,000个"
+      "unique": "像圣杯一样:独一无二",
+      "mythic": "给幸运的人:最多10个",
+      "legendary": "限量供应:最多100个",
+      "epic": "最大供应量:1000个",
+      "rare": "最大供应量:5000个",
+      "uncommon": "最大供应量:10,000个",
+      "common": "最大供应量:100,000个"
     },
     "category": {
       "body_shape": "身材",
@@ -197,6 +259,11 @@
       "upper_body": "上半身"
     }
   },
+   "login": {
+    "modal": {
+      "subtitle": "Matic Network への接続方法を選択します。"
+    }
+  },
   "sell_page": {
     "title": "待售列表",
     "update_title": "更新您的列表",
@@ -211,13 +278,15 @@
     "confirm": {
       "title": "请确认",
       "line_one": "您将要列出{amount}待售的{name}。",
-      "line_two": "请重新输入价格以确认："
+      "line_two": "请重新输入价格以确认:"
     }
   },
   "buy_page": {
     "title": "购买{category}",
-    "subtitle": "您将以{amount}的价格购买{name}。",
+    "subtitle": "的价格购买{name}。",
+    "subtitle_old": "您将以{amount}的价格购买{name}。",
     "not_for_sale": "{name}为非卖品",
+    "item_owned": "{name} は既に所有されています。",
     "price_too_high": "鉴于当前的汇率，购买此{category}将花费您超过其正常价格{percentageIncrease}％的费用。",
     "please_wait": "请等待，直到价格再次正常化",
     "actual_price": "鉴于当前汇率，您的最终价格约为{computedPrice}，因此上述价格是一个近似值",
@@ -314,8 +383,8 @@
       "cancel_bid": "您取消了对{name}的{price}出价。"
     }
   },
-  "mana": {
-    "running_on": "这是{network}网络中运行的MANA"
+  "species": {
+    "running_on": "这是{network}网络中运行的Species"
   },
   "wallet": {
     "sign_in_required": "您需要{sign_in}才能访问此页面。",

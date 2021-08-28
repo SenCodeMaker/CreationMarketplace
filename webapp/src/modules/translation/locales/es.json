@@ -23,12 +23,14 @@
     "jump_in": "Ingresar"
   },
   "vendors": {
+    "species": "Species",
     "decentraland": "Decentraland",
     "super_rare": "SuperRare",
     "makers_place": "MakersPlace",
     "known_origin": "KnownOrigin"
   },
   "navigation": {
+    "species": "species",
     "decentraland": "Decentraland",
     "partners": "Socios",
     "my_assets": "Mi Inventario",
@@ -40,6 +42,14 @@
     "land": "Tierra",
     "parcels": "Parcelas",
     "estates": "Estates",
+    "animalia": "Animales",
+    "archaea" : "Archaeas",
+    "bacteria" : "Bacterias",
+    "plantae" : "Plantas",
+    "protozoa" : "Protozoos",
+    "fungi" : "Hongo",
+    "chromista" : "Cromistas",
+    "viruses" : "Virus",
     "wearables": "Vestimenta",
     "wearables_head": "Cabeza",
     "wearables_eyebrows": "Cejas",
@@ -72,14 +82,23 @@
   "filters": {
     "name": "Nombre",
     "newest": "Más nuevos",
+    "threatStatus": "Estado de amenaza",
     "recently_listed": "Listados recientemente",
     "cheapest": "Más baratos"
   },
   "home_page": {
-    "title": "Mercado de Decentraland",
-    "subtitle": "Bienvenido al mercado virtual de Decentraland, donde encontrarás los mejores ítems virtuales.",
+    "title": "Mercado de Species",
+    "subtitle": "Bienvenido al mercado de Species, donde encontrarás los mejores ítems eco virtuales.",
     "get_started": "Comienza a navegar",
     "learn_more": "Aprende Más",
+    "home_animalia": "Animales",
+    "home_archaea" : "Archaeas",
+    "home_bacteria" : "Bacterias",
+    "home_plantae" : "Plantas",
+    "home_protozoa" : "Protozoos",
+    "home_fungi" : "Hongo",
+    "home_chromista" : "Cromistas",
+    "home_viruses" : "Virus",
     "home_wearables": "Vestimenta",
     "home_land": "Land",
     "home_ens": "Nombres"
@@ -102,6 +121,11 @@
     "more_than_results": "+{count} resultados",
     "search": "Buscar {suffix}...",
     "search_land": "Buscar tierras...",
+    "threatStatus": "Estado de amenaza",
+    "sex": "sexo",
+    "country": "país",
+    "region": "región",
+    "kingdom": "reino",
     "rarity": "Rareza",
     "gender": "Género",
     "collection": "Colección",
@@ -129,9 +153,9 @@
     "plaza": "Plaza",
     "road": "Calle",
     "district": "Distrito",
-    "leaving_decentraland": "Saliendo de Decentraland",
-    "leaving_decentraland_description": "Aún no se pueden publicar o actualizar {vendor} assets en el Marketplace de Decentraland. ¿Quiere proceder a {vendor_link} para publicarlo ahí?",
-    "leaving_decentraland_disclaimer": "Tus NFTs van a listarse en el Marketplace de Decentraland"
+    "leaving_species": "Saliendo de Species",
+    "leaving_species_description": "El comercio aún no se ha lanzado en el mercado de especies.. ¿Quiere proceder a {vendor_link} para publicarlo ahí?",
+    "leaving_species_disclaimer": "Tus NFTs van a listarse en el Marketplace de Species"
   },
   "proximity": {
     "adjacent": "Adyacente",
@@ -153,6 +177,44 @@
     "to": "Comprador",
     "when": "Fecha",
     "price": "Precio"
+  },
+  "sex": {
+    "male": "Masculino",
+    "female": "Mujer",
+    "none": "Ninguno",
+    "hermaphrodite": "Hermafrodita"
+  },
+  "kingdom": {
+    "animalia" : "animal",
+    "archaea" : "arqueas",
+    "bacteria" : "bacteria",
+    "plantae" : "planta",
+    "protozoa" : "protozoos",
+    "fungi" : "hongos",
+    "chromista" : "chromista",
+    "viruses" : "virus"
+  },
+  "region": {
+    "africa" : "África",
+    "asia" : "Asia",
+    "europe" : "Europa",
+    "north_america" : "Norteamérica",
+    "oceania" : "Oceanía",
+    "latin_america" : "Latinoamérica",
+    "antarctica" : "Antártida"
+  },
+  "threatStatus": {
+    "extinct": "extinto",
+    "extinct_in_the_wild": "extinto en estado salvaje",
+    "regionally_extinct" : "regionalmente extinto",
+    "critically_endangered" : "críticamente en peligro",
+    "endangered" : "en peligro de extinción",
+    "vulnerable" : "vulnerable",
+    "near_threatened" : "casi amenazado",
+    "least_concern" : "menor preocupación",
+    "data_deficient" : "datos insuficientes",
+    "not_applicable" : "no aplicable",
+    "not_evaluated" : "no evaluado"
   },
   "wearable": {
     "body_shape": {
@@ -197,6 +259,11 @@
       "upper_body": "Torso"
     }
   },
+  "login": {
+    "modal": {
+      "subtitle": "Elija cómo desea conectarse a Matic Network."
+    }
+  },
   "sell_page": {
     "title": "Poner en venta",
     "update_title": "Actualizar venta",
@@ -216,7 +283,9 @@
   "buy_page": {
     "title": "Comprar {category}",
     "subtitle": "Estás por comprar {name} por {amount}.",
+    "subtitle_old": "Estás por comprar {name}.",
     "not_for_sale": "{name} no esta en venta.",
+    "item_owned": "{name} ya ha sido propiedad.",
     "price_too_high": "Dados los precios de cambio actuales, comprar {category} te costará un {percentageIncrease}% más de su precio normal",
     "please_wait": "Por favor espere a que los precios se normalicen nuevamente",
     "actual_price": "El precio arriba es una aproximación, tomando los precios de cambio actuales terminarás pagando al rededor de {computedPrice}",
@@ -313,8 +382,8 @@
       "cancel_bid": "Cancelaste una oferta de {price} por {name}."
     }
   },
-  "mana": {
-    "running_on": "MANA en la red {network}"
+  "species": {
+    "running_on": "Species en la red {network}"
   },
   "wallet": {
     "sign_in_required": "Necesitas {sign_in} para acceder a esta página.",

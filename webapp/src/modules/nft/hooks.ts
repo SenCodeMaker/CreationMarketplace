@@ -3,37 +3,7 @@ import { TokenConverter } from '../vendor/TokenConverter'
 import { MarketplacePrice } from '../vendor/MarketplacePrice'
 import { isPartner } from '../vendor/utils'
 import { Order } from '../order/types'
-import { getFingerprint } from './estate/utils'
-import { NFT, NFTCategory } from './types'
-
-export const useFingerprint = (nft: NFT | null) => {
-  const [fingerprint, setFingerprint] = useState<string>()
-  const [isLoading, setIsLoading] = useState(false)
-
-  useEffect(() => {
-    if (nft) {
-      switch (nft.category) {
-        case NFTCategory.ESTATE: {
-          setIsLoading(true)
-          getFingerprint(nft.tokenId)
-            .then(result => setFingerprint(result))
-            .finally(() => setIsLoading(false))
-            .catch(error =>
-              console.error(
-                `Error getting fingerprint for nft ${nft.tokenId}`,
-                error
-              )
-            )
-          break
-        }
-        default:
-          break
-      }
-    }
-  }, [nft, setFingerprint, setIsLoading])
-
-  return [fingerprint, isLoading] as const
-}
+import { NFT } from './types'
 
 export const useComputedPrice = (nft: NFT, order: Order | null) => {
   const [computedPrice, setComputedPrice] = useState<string>()
@@ -48,14 +18,14 @@ export const useComputedPrice = (nft: NFT, order: Order | null) => {
 
       setIsLoading(true)
       tokenConverter
-        .contractEthToMANA(order.ethPrice!)
+        .contractEthToSpecies(order.ethPrice!)
         .then(computedPrice => {
           const percentage = marketPrice.getPercentageIncrease(
-            computedPrice,
+            computedPrice as unknown as string,
             order.price
           )
 
-          setComputedPrice(computedPrice)
+          setComputedPrice(computedPrice as unknown as string)
           setPercentageIncrease(percentage)
           setIsAboveMaxPercentage(
             marketPrice.isAboveMaxIncreasePercentage(percentage)

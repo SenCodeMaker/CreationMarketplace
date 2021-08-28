@@ -25,8 +25,8 @@ export class MarketplacePrice {
       )
     }
 
-    this.feePerMillion = toBN(feePerMillion)
-    this.oneMillion = toBN('1000000')
+    this.feePerMillion = toBN(feePerMillion) as any
+    this.oneMillion = toBN('1000000') as any
 
     this.maxPriceIncreasePercentage = maxPriceIncreasePercentage
   }

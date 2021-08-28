@@ -1,5 +1,5 @@
 import { Address } from 'web3x-es/address'
-import { Converter } from '../../contracts/Converter'
+// import { Converter } from '../../contracts/Converter'
 import { ContractFactory } from '../contract/ContractFactory'
 
 type Ticker = {
@@ -41,6 +41,10 @@ export class TokenConverter {
     this.converterExchange = converterExchange
   }
 
+  async marketEthSpecies(ethAmount: number) {
+    return this.marketEthToToken(ethAmount, 'species', this.converterExchange)
+  }
+
   async marketEthToMANA(ethAmount: number) {
     return this.marketEthToToken(
       ethAmount,
@@ -71,19 +75,18 @@ export class TokenConverter {
     return pricesCache[coinId][ethAmount]
   }
 
-  async contractEthToMANA(ethAmount: string) {
-    const manaAddress = process.env.REACT_APP_MANA_ADDRESS!
-    return this.contractEthToToken(ethAmount, manaAddress)
+  async contractEthToSpecies(ethAmount: string) {
+    const speciesAddress = process.env.REACT_APP_SPECIES_ADDRESS!
+    return this.contractEthToToken(ethAmount, speciesAddress)
   }
 
   async contractEthToToken(ethAmount: string, tokenAddress: string) {
-    const converter = await ContractFactory.build(
-      Converter,
-      this.converterAddress
-    )
-
-    return converter.methods
-      .calcNeededTokensForEther(Address.fromString(tokenAddress), ethAmount)
-      .call()
+    // const converter = await ContractFactory.build(
+    //   Converter,
+    //   this.converterAddress
+    // ) as any
+    // return converter.methods
+    //   .calcNeededTokensForEther(Address.fromString(tokenAddress), ethAmount)
+    //   .call()
   }
 }

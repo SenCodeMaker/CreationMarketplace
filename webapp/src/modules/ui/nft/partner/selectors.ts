@@ -25,9 +25,9 @@ export const getPartners = createSelector<
   const result: Record<string, NFT[]> = {}
 
   for (const partner of getAllPartners()) {
-    result[partner] = partnerState[partner as PartnerView].map(
-      id => nftsById[id]
-    )
+    // result[partner] = partnerState[partner as PartnerView].map(
+    //   id => nftsById[id]
+    // )
   }
 
   return result

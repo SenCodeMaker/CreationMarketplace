@@ -1,9 +1,9 @@
+import { Transaction } from 'decentraland-dapps/dist/modules/transaction/types'
 import {
+  Authorization,
   grantTokenRequest,
   revokeTokenRequest
-} from 'decentraland-dapps/dist/modules/authorization/actions'
-import { Authorization } from 'decentraland-dapps/dist/modules/authorization/types'
-import { Transaction } from 'decentraland-dapps/dist/modules/transaction/types'
+} from '../../../modules/authorization/types'
 
 export type Props = {
   authorization: Authorization

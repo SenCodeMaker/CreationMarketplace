@@ -2,15 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { Network } from '@dcl/schemas'
 import { fromWei } from 'web3x-es/utils'
 import dateFnsFormat from 'date-fns/format'
-import {
-  Authorization,
-  AuthorizationType
-} from 'decentraland-dapps/dist/modules/authorization/types'
-import { hasAuthorization } from 'decentraland-dapps/dist/modules/authorization/utils'
+import { AuthorizationType } from 'decentraland-dapps/dist/modules/authorization/types'
 import { t, T } from 'decentraland-dapps/dist/modules/translation/utils'
 import { Header, Form, Field, Button, Modal } from 'decentraland-ui'
-import { ContractName } from 'decentraland-transactions'
-import { toMANA, fromMANA } from '../../../lib/mana'
+import { toSPECIES, fromSPECIES } from '../../../lib/species'
 import {
   INPUT_FORMAT,
   getDefaultExpirationDate
@@ -20,11 +15,16 @@ import { locations } from '../../../modules/routing/locations'
 import { VendorFactory } from '../../../modules/vendor/VendorFactory'
 import { AuthorizationModal } from '../../AuthorizationModal'
 import { NFTAction } from '../../NFTAction'
-import { Mana } from '../../Mana'
+import { Species } from '../../Species'
 import { getContractNames } from '../../../modules/vendor'
 import { getContract } from '../../../modules/contract/utils'
 import { NFTCategory } from '../../../modules/nft/types'
 import { Props } from './SellModal.types'
+import {
+  Authorization,
+  ContractName,
+  hasAuthorization
+} from '../../../modules/authorization/types'
 
 const SellModal = (props: Props) => {
   const {
@@ -39,7 +39,7 @@ const SellModal = (props: Props) => {
 
   const isUpdate = order !== null
   const [price, setPrice] = useState(
-    isUpdate ? toMANA(+fromWei(order!.price, 'ether')) : ''
+    isUpdate ? toSPECIES(+fromWei(order!.price, 'ether')) : ''
   )
   const [expiresAt, setExpiresAt] = useState(
     isUpdate && order!.expiresAt
@@ -73,16 +73,17 @@ const SellModal = (props: Props) => {
     address: wallet.address,
     authorizedAddress: marketplace.address,
     contractAddress: nft.contractAddress,
-    contractName:
-      nft.category === NFTCategory.WEARABLE && nft.network === Network.MATIC
+    contractName: ContractName.SPECIESToken,
+      /* nft.category === NFTCategory.WEARABLE && nft.network ===
+      Network.MATIC
         ? ContractName.ERC721CollectionV2
-        : ContractName.ERC721,
+        : ContractName.ERC721,*/
     chainId: nft.chainId,
     type: AuthorizationType.APPROVAL
   }
 
   const handleCreateOrder = () =>
-    onCreateOrder(nft, fromMANA(price), new Date(expiresAt).getTime())
+    onCreateOrder(nft, fromSPECIES(price), new Date(expiresAt).getTime())
 
   const handleSubmit = () => {
     if (hasAuthorization(authorizations, authorization)) {
@@ -101,7 +102,7 @@ const SellModal = (props: Props) => {
   const isDisabled =
     !orderService.canSell() ||
     !isOwnedBy(nft, wallet) ||
-    fromMANA(price) <= 0 ||
+    fromSPECIES(price) <= 0 ||
     isInvalidDate
 
   return (
@@ -123,12 +124,12 @@ const SellModal = (props: Props) => {
           <Field
             label={t('sell_page.price')}
             type="text"
-            placeholder={toMANA(1000)}
+            placeholder={toSPECIES(1000)}
             value={price}
             focus={true}
             onChange={(_event, props) => {
-              const newPrice = fromMANA(props.value)
-              setPrice(toMANA(newPrice))
+              const newPrice = fromSPECIES(props.value)
+              setPrice(toSPECIES(newPrice))
             }}
           />
           <Field
@@ -171,9 +172,9 @@ const SellModal = (props: Props) => {
               values={{
                 name: <b>{getNFTName(nft)}</b>,
                 amount: (
-                  <Mana network={nft.network} inline>
-                    {fromMANA(price).toLocaleString()}
-                  </Mana>
+                  <Species network={nft.network} inline>
+                    {fromSPECIES(price).toLocaleString()}
+                  </Species>
                 )
               }}
             />
@@ -184,8 +185,8 @@ const SellModal = (props: Props) => {
               placeholder={price}
               value={confirmPrice}
               onChange={(_event, props) => {
-                const newPrice = fromMANA(props.value)
-                setConfirmPrice(toMANA(newPrice))
+                const newPrice = fromSPECIES(props.value)
+                setConfirmPrice(toSPECIES(newPrice))
               }}
             />
           </Modal.Content>
@@ -202,7 +203,7 @@ const SellModal = (props: Props) => {
             <Button
               type="submit"
               primary
-              disabled={fromMANA(price) !== fromMANA(confirmPrice)}
+              disabled={fromSPECIES(price) !== fromSPECIES(confirmPrice)}
             >
               {t('global.proceed')}
             </Button>

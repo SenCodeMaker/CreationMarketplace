@@ -1,4 +1,11 @@
 {
+  "@dapps": {
+    "login": {
+      "modal": {
+          "subtitle": "Choose how you want to connect to Matic."
+    }
+  }
+  },
   "global": {
     "assets": "Assets",
     "address": "Address",
@@ -22,12 +29,14 @@
     "apply": "Apply"
   },
   "vendors": {
+    "species": "Species",
     "decentraland": "Decentraland",
     "super_rare": "SuperRare",
     "makers_place": "MakersPlace",
     "known_origin": "KnownOrigin"
   },
   "navigation": {
+    "species": "species",
     "decentraland": "Decentraland",
     "partners": "Partners",
     "my_assets": "My Assets",
@@ -39,6 +48,14 @@
     "land": "Land",
     "parcels": "Parcels",
     "estates": "Estates",
+    "animalia": "Animals",
+    "archaea" : "Archaeas",
+    "bacteria" : "Bacterias",
+    "plantae" : "Plants",
+    "protozoa" : "Protozoas",
+    "fungi" : "Fungus",
+    "chromista" : "Chromistas",
+    "viruses" : "Viruses",
     "wearables": "Wearables",
     "wearables_head": "Head",
     "wearables_eyebrows": "Eyebrows",
@@ -73,14 +90,23 @@
   "filters": {
     "name": "Name",
     "newest": "Newest",
+    "threatStatus": "Threat status",
     "recently_listed": "Recently listed",
     "cheapest": "Cheapest"
   },
   "home_page": {
-    "title": "Decentraland Marketplace",
-    "subtitle": "Welcome to the virtual world’s one-stop-shop for the very best digital assets.",
+    "title": "Species Marketplace",
+    "subtitle": "Welcome to the eco friendly world’s digital assets market.",
     "get_started": "Start Browsing",
     "learn_more": "Learn More",
+    "home_animalia": "Animals",
+    "home_archaea" : "Archaeas",
+    "home_bacteria" : "Bacterias",
+    "home_plantae" : "Plants",
+    "home_protozoa" : "Protozoas",
+    "home_fungi" : "Fungus",
+    "home_chromista" : "Chromistas",
+    "home_viruses" : "Viruses",
     "home_wearables": "Wearables",
     "home_land": "Parcels and Estates",
     "home_ens": "Names"
@@ -103,6 +129,11 @@
     "more_than_results": "+{count} results",
     "search": "Search {suffix}...",
     "search_land": "Search land...",
+    "threatStatus": "Threat status",
+    "sex": "sex",
+    "region": "region",
+    "country": "country",
+    "kingdom": "kingdom",
     "rarity": "Rarity",
     "gender": "Gender",
     "collection": "Collection",
@@ -134,9 +165,9 @@
     "district": "District",
     "jump": "Jump",
     "in": "In",
-    "leaving_decentraland": "Leaving Decentraland",
-    "leaving_decentraland_description": "You can't publish or update {vendor} assets to the Decentraland Marketplace yet. Do you want to proceed to {vendor_link} to publish it there?",
-    "leaving_decentraland_disclaimer": "Your NFTs will still be listed in the Decentraland Marketplace"
+    "leaving_species": "Leaving Species Market",
+    "leaving_species_description": "Trading is not launched on the Species Marketplace yet. Do you want to proceed to {vendor_link} to publish it there?",
+    "leaving_species_disclaimer": "Your NFTs will still be listed in the Species Marketplace"
   },
   "proximity": {
     "adjacent": "Adjacent",
@@ -158,6 +189,44 @@
     "to": "To",
     "when": "When",
     "price": "Price"
+  },
+  "sex": {
+    "male": "Male",
+    "female": "Female",
+    "none": "None",
+    "hermaphrodite": "Hermaphrodite"
+  },
+  "kingdom": {
+    "animalia" : "Animal",
+    "archaea" : "Archaea",
+    "bacteria" : "Bacteria",
+    "plantae" : "Plant",
+    "protozoa" : "Protozoa",
+    "fungi" : "Fungus",
+    "chromista" : "Chromista",
+    "viruses" : "Virus"
+  },
+  "region": {
+    "africa" : "Africa",
+    "asia" : "Asia",
+    "europe" : "Europe",
+    "north_america" : "North America",
+    "oceania" : "Oceania",
+    "latin_america" : "Latin America",
+    "antarctica" : "Antarctica"
+  },
+  "threatStatus": {
+    "extinct": "Extinct",
+    "extinct_in_the_wild": "Extinct in the wild",
+    "regionally_extinct" : "Regionally extinct",
+    "critically_endangered" : "Critically endangered",
+    "endangered" : "Endangered",
+    "vulnerable" : "Vulnerable",
+    "near_threatened" : "Near threatened",
+    "least_concern" : "Least concern",
+    "data_deficient" : "Data deficient",
+    "not_applicable" : "Not applicable",
+    "not_evaluated" : "Not evaluated"
   },
   "wearable": {
     "body_shape": {
@@ -202,6 +271,11 @@
       "upper_body": "Upper Body"
     }
   },
+  "login": {
+    "modal": {
+      "subtitle": "Choose how you want to connect to Matic Network."
+    }
+  },
   "sell_page": {
     "title": "List for sale",
     "update_title": "Update your listing",
@@ -221,7 +295,9 @@
   },
   "buy_page": {
     "title": "Buy {category}",
-    "subtitle": "You are about to buy {name} for {amount}.",
+    "subtitle": "You are about to buy {name}.",
+    "subtitle_old": "You are about to buy {name} for {amount}.",
+    "item_owned": "{name} has already been owned.",
     "not_for_sale": "{name} is not for sale.",
     "price_too_high": "Given the current exchange rates buying this {category} will cost you over {percentageIncrease}% its normal price.",
     "please_wait": "Please wait until prices normalize again",
@@ -319,8 +395,8 @@
       "cancel_bid": "You cancelled a bid of {price} on {name}."
     }
   },
-  "mana": {
-    "running_on": "This is MANA running in the {network} Network"
+  "species": {
+    "running_on": "This is Species running in the {network} Network"
   },
   "wallet": {
     "sign_in_required": "You need to {sign_in} to access this page.",

@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react'
 import { Responsive } from 'decentraland-ui'
 
-import { getPartners } from '../../modules/vendor/utils'
 import { VendorName } from '../../modules/vendor/types'
 import { Menu } from '../Menu'
 import { MenuItem } from '../Menu/MenuItem'
@@ -18,19 +17,19 @@ const VendorStrip = (props: Props) => {
     [onBrowse, address]
   )
 
-  const decentraland = VendorName.DECENTRALAND
+  const species = VendorName.SPECIES
 
   return (
     <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
       <Menu className="VendorStrip">
         <MenuItem
-          key={decentraland}
-          value={decentraland}
+          key={species}
+          value={species}
           currentValue={vendor}
-          image={`/${decentraland}.png`}
-          onClick={() => handleClick(decentraland)}
+          image={`/${species}.png`}
+          onClick={() => handleClick(species)}
         />
-        {getPartners().map(partner => (
+        {/* {getPartners().map(partner => (
           <MenuItem
             key={partner}
             value={partner}
@@ -38,7 +37,7 @@ const VendorStrip = (props: Props) => {
             image={`/${partner}.png`}
             onClick={() => handleClick(partner)}
           />
-        ))}
+        ))} */}
       </Menu>
     </Responsive>
   )

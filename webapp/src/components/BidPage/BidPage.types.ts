@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux'
 import { CallHistoryMethodAction } from 'connected-react-router'
-import { Authorization } from 'decentraland-dapps/dist/modules/authorization/types'
 import {
   placeBidRequest,
   PlaceBidRequestAction
 } from '../../modules/bid/actions'
+import { Authorization } from '../../modules/authorization/types'
 
 export type Props = {
   authorizations: Authorization[]

@@ -29,7 +29,22 @@ const Actions = (props: Props) => {
 
   return (
     <>
-      {order ? (
+      {!isOwner ? (
+        <>
+           <Button
+            as={Link}
+            to={locations.buy(contractAddress, tokenId)}
+            primary>
+              {t('nft_page.buy')}
+           </Button>
+          </>
+        ): isOwner ? (
+        <Button onClick={() => setShowLeavingSiteModal(true)} primary>
+          {t('nft_page.sell')}
+        </Button>
+      ) : null}
+
+      {/* {order ? (
         isOwner && canSell ? (
           <>
             <Button
@@ -80,7 +95,7 @@ const Actions = (props: Props) => {
         <Button as={Link} to={locations.transfer(contractAddress, tokenId)}>
           {t('nft_page.transfer')}
         </Button>
-      ) : null}
+      ) : null} */}
 
       <Modal
         className="LeavingSiteModal"
@@ -88,11 +103,11 @@ const Actions = (props: Props) => {
         open={showLeavingSiteModal}
         onClose={() => setShowLeavingSiteModal(false)}
       >
-        <Modal.Header>{t('nft_page.leaving_decentraland')}</Modal.Header>
+        <Modal.Header>{t('nft_page.leaving_species')}</Modal.Header>
         <Modal.Content>
           <p>
             <T
-              id="nft_page.leaving_decentraland_description"
+              id="nft_page.leaving_species_description"
               values={{
                 vendor: t(`vendors.${vendor}`),
                 vendor_link: (
@@ -105,7 +120,7 @@ const Actions = (props: Props) => {
             <br />
             <br />
             <small>
-              <i>{t('nft_page.leaving_decentraland_disclaimer')}</i>
+              <i>{t('nft_page.leaving_species_disclaimer')}</i>
             </small>
           </p>
         </Modal.Content>

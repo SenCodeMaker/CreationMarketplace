@@ -15,9 +15,9 @@ import { locations } from '../../../../modules/routing/locations'
 import { NFTImage } from '../../../NFTImage'
 import { Row } from '../../../Layout/Row'
 import { Column } from '../../../Layout/Column'
-import { Mana } from '../../../Mana'
 import { Props } from './TransactionDetail.types'
 import './TransactionDetail.css'
+import { Species } from '../../../Species'
 
 const getHref = (tx: Transaction) => {
   if (tx.status === null) {
@@ -39,7 +39,7 @@ const TransactionDetail = (props: Props) => {
               <NFTImage nft={nft} isSmall />
             </Link>
           ) : (
-            <Mana />
+            <Species /> // mettre ici notre token
           )}
         </div>
         <div className="text">

@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react'
 import { Container, Page, Responsive } from 'decentraland-ui'
 
 import { View } from '../../modules/ui/types'
-import { Atlas } from '../Atlas'
 import { AccountSidebar } from '../AccountSidebar'
 import { NFTList } from '../NFTList'
 import { VendorStrip } from '../VendorStrip'
@@ -12,7 +11,7 @@ import { NFTFilters } from '../Vendor/NFTFilters'
 import { NFTSidebar } from '../Vendor/NFTSidebar'
 import { Props } from './NFTBrowse.types'
 import './NFTBrowse.css'
-
+// notre token
 const NFTBrowse = (props: Props) => {
   const {
     vendor,
@@ -86,7 +85,7 @@ const NFTBrowse = (props: Props) => {
           )}
           {isMap ? (
             <div className="Atlas">
-              <Atlas withNavigation withPopup showOnSale={onlyOnSale} />
+              {/* <Atlas withNavigation withPopup showOnSale={onlyOnSale} /> */}
               <div
                 className="fullscreen-button"
                 onClick={handleSetFullscreen}

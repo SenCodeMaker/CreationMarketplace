@@ -9,17 +9,11 @@ import {
   CHANGE_ACCOUNT,
   CHANGE_NETWORK
 } from 'decentraland-dapps/dist/modules/wallet/actions'
-import { fetchAuthorizationsRequest } from 'decentraland-dapps/dist/modules/authorization/actions'
-import {
-  Authorization,
-  AuthorizationType
-} from 'decentraland-dapps/dist/modules/authorization/types'
+import { AuthorizationType } from 'decentraland-dapps/dist/modules/authorization/types'
 
-import { getContractNames } from '../vendor'
 import { contracts, getContract } from '../contract/utils'
-import { isPartner } from '../vendor/utils'
-import { ContractName } from 'decentraland-transactions'
-import { NFTCategory } from '../nft/types'
+import { getContractNames } from '../vendor'
+import { ContractName, Authorization } from '../authorization/types'
 
 const baseWalletSaga = createWalletSaga({
   CHAIN_ID: +(process.env.REACT_APP_CHAIN_ID || 1)
@@ -42,94 +36,117 @@ function* handleWallet(
 
   const contractNames = getContractNames()
 
-  const marketplaceEthereum = getContract({
-    name: contractNames.MARKETPLACE,
+  // const marketplaceEthereum = getContract({
+  //   name: contractNames.MARKETPLACE,
+  //   network: Network.ETHEREUM
+  // })
+
+  // const marketplaceMatic = getContract({
+  //   name: contractNames.MARKETPLACE,
+  //   network: Network.MATIC
+  // })
+
+  // const marketplaceAdapter = getContract({
+  //   name: contractNames.MARKETPLACE_ADAPTER
+  // })
+
+  // const bids = getContract({
+  //   name: contractNames.BIDS
+  // })
+
+  // const manaEthereum = getContract({
+  //   name: contractNames.MANA,
+  //   network: Network.ETHEREUM
+  // })
+
+  // const manaMatic = getContract({
+  //   name: contractNames.MANA,
+  //   network: Network.MATIC
+  // })
+
+  const speciesMatic = getContract({
+    name: contractNames.SPECIES,
     network: Network.ETHEREUM
-  })
-
-  const marketplaceMatic = getContract({
-    name: contractNames.MARKETPLACE,
-    network: Network.MATIC
-  })
-
-  const marketplaceAdapter = getContract({
-    name: contractNames.MARKETPLACE_ADAPTER
-  })
-
-  const bids = getContract({
-    name: contractNames.BIDS
-  })
-
-  const manaEthereum = getContract({
-    name: contractNames.MANA,
-    network: Network.ETHEREUM
-  })
-
-  const manaMatic = getContract({
-    name: contractNames.MANA,
-    network: Network.MATIC
   })
 
   const authorizations: Authorization[] = []
 
   authorizations.push({
     address,
-    authorizedAddress: marketplaceEthereum.address,
-    contractAddress: manaEthereum.address,
-    contractName: ContractName.MANAToken,
-    chainId: manaEthereum.chainId,
-    type: AuthorizationType.ALLOWANCE
+    authorizedAddress: speciesMatic.address,
+    contractAddress: speciesMatic.address,
+    contractName: ContractName.SPECIESToken,
+    chainId: speciesMatic.chainId,
+    type: AuthorizationType.APPROVAL
   })
 
-  authorizations.push({
-    address,
-    authorizedAddress: marketplaceMatic.address,
-    contractAddress: manaMatic.address,
-    contractName: ContractName.MANAToken,
-    chainId: manaMatic.chainId,
-    type: AuthorizationType.ALLOWANCE
-  })
+  // authorizations.push({
+  //   address,
+  //   authorizedAddress: marketplaceEthereum.address,
+  //   contractAddress: manaEthereum.address,
+  //   contractName: ContractName.MANAToken,
+  //   chainId: manaEthereum.chainId,
+  //   type: AuthorizationType.ALLOWANCE
+  // })
 
-  authorizations.push({
-    address,
-    authorizedAddress: marketplaceAdapter.address,
-    contractAddress: manaEthereum.address,
-    contractName: ContractName.MANAToken,
-    chainId: manaEthereum.chainId,
-    type: AuthorizationType.ALLOWANCE
-  })
+  // authorizations.push({
+  //   address,
+  //   authorizedAddress: marketplaceMatic.address,
+  //   contractAddress: manaMatic.address,
+  //   contractName: ContractName.MANAToken,
+  //   chainId: manaMatic.chainId,
+  //   type: AuthorizationType.ALLOWANCE
+  // })
 
-  authorizations.push({
-    address,
-    authorizedAddress: bids.address,
-    contractAddress: manaEthereum.address,
-    contractName: ContractName.MANAToken,
-    chainId: manaEthereum.chainId,
-    type: AuthorizationType.ALLOWANCE
-  })
+  // authorizations.push({
+  //   address,
+  //   authorizedAddress: marketplaceMatic.address,
+  //   contractAddress: speciesMatic.address,
+  //   contractName: ContractName.SPECIESToken,
+  //   chainId: speciesMatic.chainId,
+  //   type: AuthorizationType.ALLOWANCE
+  // })
 
-  for (const contract of contracts.filter(c => c.category !== null)) {
-    const marketplace = getContract({
-      name:
-        contract.vendor && isPartner(contract.vendor)
-          ? contractNames.MARKETPLACE_ADAPTER
-          : contractNames.MARKETPLACE,
-      network: contract.network
-    })!
+  // authorizations.push({
+  //   address,
+  //   authorizedAddress: marketplaceAdapter.address,
+  //   contractAddress: manaEthereum.address,
+  //   contractName: ContractName.MANAToken,
+  //   chainId: manaEthereum.chainId,
+  //   type: AuthorizationType.ALLOWANCE
+  // })
 
-    authorizations.push({
-      address,
-      authorizedAddress: marketplace.address,
-      contractAddress: contract.address,
-      contractName:
-        contract.category === NFTCategory.WEARABLE &&
-        contract.network === Network.MATIC
-          ? ContractName.ERC721CollectionV2
-          : ContractName.ERC721,
-      chainId: contract.chainId,
-      type: AuthorizationType.APPROVAL
-    })
-  }
+  // authorizations.push({
+  //   address,
+  //   authorizedAddress: bids.address,
+  //   contractAddress: manaEthereum.address,
+  //   contractName: ContractName.MANAToken,
+  //   chainId: manaEthereum.chainId,
+  //   type: AuthorizationType.ALLOWANCE
+  // })
 
-  yield put(fetchAuthorizationsRequest(authorizations))
+  // for (const contract of contracts.filter(c => c.category !== null)) {
+  //   const marketplace = getContract({
+  //     name:
+  //       /* contract.vendor && isPartner(contract.vendor)
+  //          ? contractNames.MARKETPLACE_ADAPTER
+  //          : */ contractNames.MARKETPLACE,
+  //     network: contract.network
+  //   })
+
+  // authorizations.push({
+  //   address,
+  //   authorizedAddress: marketplace.address,
+  //   contractAddress: contract.address,
+  //   contractName:
+  //     contract.category === NFTCategory.WEARABLE &&
+  //       contract.network === Network.MATIC
+  //       ? ContractName.ERC721CollectionV2
+  //       : ContractName.ERC721,
+  //   chainId: contract.chainId,
+  //   type: AuthorizationType.APPROVAL
+  // })
+  // }
+
+  // yield put(fetchAuthorizationsRequest(authorizations))
 }

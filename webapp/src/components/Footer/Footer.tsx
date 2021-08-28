@@ -1,9 +1,9 @@
 import React from 'react'
-import { FooterProps } from 'decentraland-ui'
-import { Footer as BaseFooter } from 'decentraland-dapps/dist/containers'
+import { FooterProps, Locale } from 'decentraland-ui'
+import { BaseFooter } from './BaseFooter/BaseFooter'
 import * as tranlsations from '../../modules/translation/locales'
 
-const locales = Object.keys(tranlsations)
+const locales = Object.keys(tranlsations) as Locale[]
 
 const Footer = (props: FooterProps) => (
   <BaseFooter locales={locales} {...props} />

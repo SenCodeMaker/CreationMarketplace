@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux'
 import { CallHistoryMethodAction } from 'connected-react-router'
-import { Wallet } from 'decentraland-dapps/dist/modules/wallet/types'
 import { Bid } from '../../modules/bid/types'
 import {
   fetchBidsByAddressRequest,
   FetchBidsByAddressRequestAction
 } from '../../modules/bid/actions'
+import { Wallet } from '../../modules/authorization/types'
 
 export type Props = {
   wallet: Wallet | null

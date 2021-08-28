@@ -1,12 +1,15 @@
 export const View = {
   MARKET: 'market',
   ACCOUNT: 'account',
-  HOME_WEARABLES: 'home_wearables',
-  HOME_LAND: 'home_land',
+  HOME_ANIMALIA: 'home_animalia',
+  HOME_ARCHAEA: 'home_archaea',
+  HOME_BACTERIA: 'home_bacteria',
+  HOME_PLANTAE: 'home_plantae',
+  HOME_PROTOZOA: 'home_protozoa',
+  HOME_FUNGI: 'home_fungi',
+  HOME_CHROMISTA: 'home_chromista',
+  HOME_VIRUSES: 'home_viruses',
   HOME_ENS: 'home_ens',
-  PARTNERS_SUPER_RARE: 'super_rare',
-  PARTNERS_MAKERS_PLACE: 'makers_place',
-  PARTNERS_KNOWN_ORIGIN: 'known_origin',
   LOAD_MORE: 'load_more',
   ATLAS: 'atlas'
 } as const

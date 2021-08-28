@@ -1,15 +1,10 @@
 import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import {
-  getData as getAuthorizations,
   getLoading,
   getError
 } from 'decentraland-dapps/dist/modules/authorization/selectors'
-import {
-  FETCH_AUTHORIZATIONS_REQUEST,
-  grantTokenRequest,
-  revokeTokenRequest
-} from 'decentraland-dapps/dist/modules/authorization/actions'
+import { FETCH_AUTHORIZATIONS_REQUEST } from 'decentraland-dapps/dist/modules/authorization/actions'
 
 import { RootState } from '../../modules/reducer'
 import { isLoadingType } from 'decentraland-dapps/dist/modules/loading/selectors'
@@ -21,6 +16,7 @@ import {
   MapDispatchProps
 } from './SettingsPage.types'
 import SettingsPage from './SettingsPage'
+import { grantTokenRequest, revokeTokenRequest, getData as getAuthorizations } from '../../modules/authorization/types'
 
 const mapState = (state: RootState): MapStateProps => {
   const wallet = getWallet(state)

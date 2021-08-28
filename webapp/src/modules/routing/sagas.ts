@@ -25,8 +25,10 @@ import {
   getSortBy,
   getOnlyOnSale,
   getIsMap,
-  getWearableRarities,
-  getWearableGenders,
+  getCountries,
+  getSexes,
+  getKingdoms,
+  getThreatStatus,
   getContracts,
   getSearch
 } from './selectors'
@@ -75,9 +77,9 @@ function* fetchNFTsFromRoute(searchOptions: SearchOptions) {
 
   const isLoadMore = view === View.LOAD_MORE
 
-  const offset = isLoadMore ? page - 1 : 0
-  const skip = Math.min(offset, MAX_PAGE) * PAGE_SIZE
-  const first = Math.min(page * PAGE_SIZE - skip, getMaxQuerySize(vendor))
+  const pageOffset = isLoadMore ? page - 1 : 0
+  const offset = Math.min(pageOffset, MAX_PAGE) * PAGE_SIZE
+  const fetchSize = Math.min(page * PAGE_SIZE - offset, getMaxQuerySize(vendor))
 
   const [orderBy, orderDirection] = getOrder(sortBy)
   const category = getSearchCategory(section)
@@ -92,8 +94,8 @@ function* fetchNFTsFromRoute(searchOptions: SearchOptions) {
         vendor,
         view,
         params: {
-          first,
-          skip,
+          fetchSize,
+          offset,
           orderBy,
           orderDirection,
           onlyOnSale,
@@ -119,8 +121,10 @@ function* getNewSearchOptions(current: SearchOptions) {
     onlyOnSale: yield select(getOnlyOnSale),
     isMap: yield select(getIsMap),
     isFullscreen: yield select(getIsFullscreen),
-    wearableRarities: yield select(getWearableRarities),
-    wearableGenders: yield select(getWearableGenders),
+    countries: yield select(getCountries),
+    sexes: yield select(getSexes),
+    threatStatus: yield select(getThreatStatus),
+    kingdoms: yield select(getKingdoms),
     contracts: yield select(getContracts),
     network: yield select(getNetwork)
   }
@@ -173,14 +177,19 @@ function* deriveCurrentOptions(
   const nextCategory = getSearchCategory(current.section!)
 
   switch (nextCategory) {
-    case NFTCategory.WEARABLE: {
+    case NFTCategory.ANIMALIA:
+    case NFTCategory.ARCHAEA:
+    case NFTCategory.BACTERIA:
+    case NFTCategory.CHROMISTA:
+    case NFTCategory.FUNGI:
+    case NFTCategory.PLANTAE:
+    case NFTCategory.PROTOZOA:
+    case NFTCategory.VIRUSES: {
       const prevCategory = getSearchCategory(previous.section!)
 
       // Category specific logic to keep filters if the category doesn't change
       if (prevCategory && prevCategory === nextCategory) {
         newOptions = {
-          wearableRarities: yield select(getWearableRarities),
-          wearableGenders: yield select(getWearableGenders),
           contracts: yield select(getContracts),
           search: yield select(getSearch),
           network: yield select(getNetwork),
@@ -200,7 +209,7 @@ function deriveView(previous: SearchOptions, current: SearchOptions) {
 }
 
 function deriveVendor(previous: SearchOptions, current: SearchOptions) {
-  return current.vendor || previous.vendor || VendorName.DECENTRALAND
+  return current.vendor || previous.vendor || VendorName.SPECIES
 }
 
 function shouldResetOptions(previous: SearchOptions, current: SearchOptions) {

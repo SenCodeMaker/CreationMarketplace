@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux'
 import { CallHistoryMethodAction } from 'connected-react-router'
-import { Wallet } from 'decentraland-dapps/dist/modules/wallet/types'
+import { Wallet } from '../../modules/authorization/types'
 import { Bid } from '../../modules/bid/types'
 import {
   CancelBidRequestAction,

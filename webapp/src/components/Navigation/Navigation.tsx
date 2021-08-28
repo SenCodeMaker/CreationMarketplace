@@ -12,10 +12,10 @@ const Navigation = (props: Props) => {
       <Tabs.Left>
         <Link to={locations.browse()}>
           <Tabs.Tab active={activeTab === NavigationTab.BROWSE}>
-            {t('navigation.decentraland')}
+            {t('navigation.species')}
           </Tabs.Tab>
         </Link>
-        <Link to={locations.partners()}>
+        {/* <Link to={locations.partners()}>
           <Tabs.Tab
             active={
               activeTab === NavigationTab.PARTNERS ||
@@ -24,17 +24,17 @@ const Navigation = (props: Props) => {
           >
             {t('navigation.partners')}
           </Tabs.Tab>
-        </Link>
+        </Link> */}
         <Link to={locations.currentAccount()}>
           <Tabs.Tab active={activeTab === NavigationTab.MY_ASSETS}>
             {t('navigation.my_assets')}
           </Tabs.Tab>
         </Link>
-        <Link to={locations.bids()}>
+        {/* <Link to={locations.bids()}>
           <Tabs.Tab active={activeTab === NavigationTab.MY_BIDS}>
             {t('navigation.my_bids')}
           </Tabs.Tab>
-        </Link>
+        </Link> */}
         <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
           <Link to={locations.activity()}>
             <Tabs.Tab active={activeTab === NavigationTab.ACTIVITY}>

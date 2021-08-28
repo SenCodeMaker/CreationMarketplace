@@ -7,9 +7,7 @@ import { authorizationSaga } from 'decentraland-dapps/dist/modules/authorization
 import { bidSaga } from './bid/sagas'
 import { nftSaga } from './nft/sagas'
 import { orderSaga } from './order/sagas'
-import { proximitySaga } from './proximity/sagas'
 import { routingSaga } from './routing/sagas'
-import { tileSaga } from './tile/sagas'
 import { translationSaga } from './translation/sagas'
 import { uiSaga } from './ui/sagas'
 import { walletSaga } from './wallet/sagas'
@@ -28,9 +26,7 @@ export function* rootSaga() {
     nftSaga(),
     orderSaga(),
     profileSaga(),
-    proximitySaga(),
     routingSaga(),
-    tileSaga(),
     translationSaga(),
     uiSaga(),
     walletSaga()

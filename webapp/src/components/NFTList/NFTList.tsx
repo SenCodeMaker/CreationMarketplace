@@ -15,11 +15,11 @@ const NFTList = (props: Props) => {
 
   const maxQuerySize = getMaxQuerySize(vendor)
 
-  const hasExtraPages =
-    (nfts.length !== count || count === maxQuerySize) && page <= MAX_PAGE
+  /*const hasExtraPages =
+    (nfts.length !== count || count === maxQuerySize) && page <= MAX_PAGE*/
 
   const isLoadingNewPage = isLoading && nfts.length >= PAGE_SIZE
-
+  
   return (
     <>
       <Card.Group>
@@ -41,7 +41,8 @@ const NFTList = (props: Props) => {
         <div className="empty">{t('nft_list.empty')}</div>
       ) : null}
 
-      {nfts.length > 0 && hasExtraPages && (!isLoading || isLoadingNewPage) ? (
+
+      {nfts.length > 0 /*&& hasExtraPages*/ && (!isLoading || isLoadingNewPage) ? (
         <div className="load-more">
           <Button loading={isLoading} inverted primary onClick={handleLoadMore}>
             {t('global.load_more')}

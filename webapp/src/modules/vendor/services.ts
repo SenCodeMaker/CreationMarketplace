@@ -1,5 +1,4 @@
-import { ChainId, Network } from '@dcl/schemas'
-import { Wallet } from 'decentraland-dapps/dist/modules/wallet/types'
+import { ChainId } from '@dcl/schemas'
 import {
   NFT,
   NFTsFetchParams,
@@ -11,6 +10,8 @@ import { Bid } from '../bid/types'
 import { OrderStatus, Order } from '../order/types'
 import { NFTsFetchFilters } from './nft/types'
 import { VendorName, TransferType } from './types'
+import { Network } from '../contract/types'
+import { Wallet } from '../authorization/types'
 
 export type Contract = {
   name: string
@@ -40,7 +41,7 @@ export interface NFTService<V extends VendorName> {
     nft: NFT<V>
   ) => Promise<string>
 }
-export class NFTService<V> {}
+export class NFTService<V> { }
 
 export interface OrderService<V extends VendorName> {
   fetchByNFT: (nft: NFT<V>) => Promise<Order[]>
@@ -56,10 +57,16 @@ export interface OrderService<V extends VendorName> {
     order: Order,
     fingerprint?: string
   ) => Promise<string>
+  buySpecie?: (
+    wallet: Wallet | null,
+    nft: NFT<V>,
+    order: Order,
+    fingerprint?: string
+  ) => Promise<string>
   cancel: (wallet: Wallet | null, nft: NFT<V>) => Promise<string>
   canSell(): boolean
 }
-export class OrderService<V> {}
+export class OrderService<V> { }
 
 export interface BidService<V extends VendorName> {
   fetchBySeller: (seller: string) => Promise<Bid[]>
@@ -75,11 +82,11 @@ export interface BidService<V extends VendorName> {
   accept: (wallet: Wallet | null, bid: Bid) => Promise<string>
   cancel: (wallet: Wallet | null, bid: Bid) => Promise<string>
 }
-export class BidService<V> {}
+export class BidService<V> { }
 
 export interface ContractService {
   build(): Promise<void>
   getContracts(): Contract[]
   getTransferType: (address: string) => TransferType
 }
-export class ContractService {}
+export class ContractService { }

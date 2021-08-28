@@ -2,10 +2,10 @@ import { connect } from 'react-redux'
 import { push } from 'connected-react-router'
 import {
   getData as getAuthorizations,
-  getLoading
-} from 'decentraland-dapps/dist/modules/authorization/selectors'
+} from '../../modules/authorization/types'
+import { getLoading } from 'decentraland-dapps/dist/modules/authorization/selectors'
 import { RootState } from '../../modules/reducer'
-import { executeOrderRequest } from '../../modules/order/actions'
+import { buyOrderRequest } from '../../modules/order/actions'
 import { MapStateProps, MapDispatchProps, MapDispatch } from './BuyPage.types'
 import BuyPage from './BuyPage'
 import { getWallet } from '../../modules/wallet/selectors'
@@ -20,8 +20,8 @@ const mapState = (state: RootState): MapStateProps => ({
 
 const mapDispatch = (dispatch: MapDispatch): MapDispatchProps => ({
   onNavigate: path => dispatch(push(path)),
-  onExecuteOrder: (order, nft, fingerprint) =>
-    dispatch(executeOrderRequest(order, nft, fingerprint))
+  onBuyOrder: (order, nft) =>
+    dispatch(buyOrderRequest(order, nft))
 })
 
 export default connect(mapState, mapDispatch)(BuyPage)

@@ -2,23 +2,22 @@ import React, { useState, useCallback } from 'react'
 import { Network } from '@dcl/schemas'
 import { Header, Form, Field, Button } from 'decentraland-ui'
 import { t, T } from 'decentraland-dapps/dist/modules/translation/utils'
-import {
-  Authorization,
-  AuthorizationType
-} from 'decentraland-dapps/dist/modules/authorization/types'
-import { hasAuthorization } from 'decentraland-dapps/dist/modules/authorization/utils'
-import { toMANA, fromMANA } from '../../../lib/mana'
+import { AuthorizationType } from 'decentraland-dapps/dist/modules/authorization/types'
+import { toSPECIES, fromSPECIES } from '../../../lib/species'
 import { NFTAction } from '../../NFTAction'
 import { getNFTName, isOwnedBy } from '../../../modules/nft/utils'
 import { getDefaultExpirationDate } from '../../../modules/order/utils'
 import { locations } from '../../../modules/routing/locations'
-import { useFingerprint } from '../../../modules/nft/hooks'
 import { AuthorizationModal } from '../../AuthorizationModal'
 import { Props } from './BidModal.types'
 import './BidModal.css'
 import { getContractNames } from '../../../modules/vendor'
 import { getContract } from '../../../modules/contract/utils'
-import { ContractName } from 'decentraland-transactions'
+import {
+  Authorization,
+  ContractName,
+  hasAuthorization
+} from '../../../modules/authorization/types'
 
 const BidModal = (props: Props) => {
   const { nft, wallet, authorizations, onNavigate, onPlaceBid } = props
@@ -26,13 +25,11 @@ const BidModal = (props: Props) => {
   const [price, setPrice] = useState('')
   const [expiresAt, setExpiresAt] = useState(getDefaultExpirationDate())
 
-  const [fingerprint, isLoading] = useFingerprint(nft)
-
   const [showAuthorizationModal, setShowAuthorizationModal] = useState(false)
 
   const handlePlaceBid = useCallback(
-    () => onPlaceBid(nft, fromMANA(price), +new Date(expiresAt), fingerprint),
-    [nft, price, expiresAt, fingerprint, onPlaceBid]
+    () => onPlaceBid(nft, fromSPECIES(price), +new Date(expiresAt), undefined),
+    [nft, price, expiresAt, undefined, onPlaceBid]
   )
 
   if (!wallet) {
@@ -42,7 +39,7 @@ const BidModal = (props: Props) => {
   const contractNames = getContractNames()
 
   const mana = getContract({
-    name: contractNames.MANA,
+    name: contractNames.SPECIES,
     network: nft.network
   })
 
@@ -55,7 +52,7 @@ const BidModal = (props: Props) => {
     address: wallet.address,
     authorizedAddress: bids.address,
     contractAddress: mana.address,
-    contractName: ContractName.MANAToken,
+    contractName: ContractName.SPECIESToken,
     chainId: nft.chainId,
     type: AuthorizationType.ALLOWANCE
   }
@@ -71,10 +68,10 @@ const BidModal = (props: Props) => {
   const handleClose = () => setShowAuthorizationModal(false)
 
   const isInvalidDate = +new Date(expiresAt) < Date.now()
-  const hasInsufficientMANA =
+  const hasInsufficientSpecies =
     !!price &&
     !!wallet &&
-    fromMANA(price) > wallet.networks[Network.ETHEREUM].mana
+    fromSPECIES(price) > wallet.networks[Network.MATIC].species
 
   return (
     <NFTAction nft={nft}>
@@ -91,15 +88,15 @@ const BidModal = (props: Props) => {
         <div className="form-fields">
           <Field
             label={t('bid_page.price')}
-            placeholder={toMANA(1000)}
+            placeholder={toSPECIES(1000)}
             value={price}
             onChange={(_event, props) => {
-              const newPrice = fromMANA(props.value)
-              setPrice(toMANA(newPrice))
+              const newPrice = fromSPECIES(props.value)
+              setPrice(toSPECIES(newPrice))
             }}
-            error={hasInsufficientMANA}
+            error={hasInsufficientSpecies}
             message={
-              hasInsufficientMANA ? t('bid_page.not_enougn_mana') : undefined
+              hasInsufficientSpecies ? t('bid_page.not_enougn_mana') : undefined
             }
           />
           <Field
@@ -127,10 +124,10 @@ const BidModal = (props: Props) => {
             primary
             disabled={
               isOwnedBy(nft, wallet) ||
-              fromMANA(price) <= 0 ||
+              fromSPECIES(price) <= 0 ||
               isInvalidDate ||
-              hasInsufficientMANA ||
-              isLoading
+              hasInsufficientSpecies ||
+              false
             }
           >
             {t('bid_page.submit')}

@@ -1,0 +1,31 @@
+.dcl.species {
+  display: inline;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: inherit;
+}
+.dcl.species .symbol {
+  font-style: normal;
+  padding-right: 0.3em;
+  transform: translateY(-0.06em);
+  display: inline-block;
+  color: inherit;
+}
+
+.dcl.species + .dcl.species {
+  padding-left: 0.3em;
+}
+
+.dcl.species.inline {
+  font-size: 1em;
+}
+
+.dcl.species .matic {
+  width: 1em;
+  height: 1em;
+  background-image: url(../../../images/species-l2.svg);
+  display: inline-block;
+  background-size: contain;
+  filter: var(--brightness);
+  transform: translateY(0.2em);
+}

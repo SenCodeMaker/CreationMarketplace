@@ -4,11 +4,11 @@ import { Page, Header, Button } from 'decentraland-ui'
 
 import { locations } from '../../modules/routing/locations'
 import { getNFTName } from '../../modules/nft/utils'
-import { formatMANA } from '../../lib/mana'
+import { formatSpecies } from '../../lib/species'
 import { Navbar } from '../Navbar'
 import { Footer } from '../Footer'
 import { Wallet } from '../Wallet'
-import { Mana } from '../Mana'
+import { Species } from '../Species'
 import { NFTProviderPage } from '../NFTProviderPage'
 import NFTAction from '../NFTAction/NFTAction'
 import { Props } from './CancelSalePage.types'
@@ -51,9 +51,9 @@ const CancelSalePage = (props: Props) => {
                       values={{
                         name: <b>{name}</b>,
                         amount: (
-                          <Mana network={nft.network} inline>
-                            {formatMANA(order.price)}
-                          </Mana>
+                          <Species network={nft.network} inline>
+                            {formatSpecies(order.price)}
+                          </Species>
                         )
                       }}
                     />

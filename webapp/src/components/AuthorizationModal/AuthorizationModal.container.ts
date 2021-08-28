@@ -1,11 +1,12 @@
 import { connect } from 'react-redux'
 import {
-  grantTokenRequest,
+  getData as getAuthorizations, grantTokenRequest,
+  revokeTokenRequest
+} from '../../modules/authorization/types'
+import {
   GRANT_TOKEN_REQUEST,
-  revokeTokenRequest,
   REVOKE_TOKEN_REQUEST
 } from 'decentraland-dapps/dist/modules/authorization/actions'
-import { getData as getAuthorizations } from 'decentraland-dapps/dist/modules/authorization/selectors'
 import { isLoadingType } from 'decentraland-dapps/dist/modules/loading/selectors'
 import { getLoading } from 'decentraland-dapps/dist/modules/authorization/selectors'
 import { RootState } from '../../modules/reducer'

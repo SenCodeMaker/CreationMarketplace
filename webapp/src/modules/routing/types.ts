@@ -1,8 +1,14 @@
 import { Network } from '@dcl/schemas'
-import { WearableRarity, WearableGender } from '../nft/wearable/types'
 import { VendorName } from '../vendor/types'
 import { Section } from '../vendor/routing/types'
 import { View } from '../ui/types'
+import {
+  Kingdom,
+  ThreatStatus,
+  Sex,
+  Country,
+  Region
+} from '../nft/species/types'
 
 export { Section }
 
@@ -10,7 +16,11 @@ export enum SortBy {
   NAME = 'name',
   NEWEST = 'newest',
   RECENTLY_LISTED = 'recently_listed',
-  CHEAPEST = 'cheapest'
+  CHEAPEST = 'cheapest',
+  COUNTRY = 'country',
+  KINGDOM = 'kingdom',
+  ThreatStatus = 'threatStatus',
+  Sex = 'sex'
 }
 
 export enum SortDirection {
@@ -27,8 +37,11 @@ export type SearchOptions = {
   onlyOnSale?: boolean
   isMap?: boolean
   isFullscreen?: boolean
-  wearableRarities?: WearableRarity[]
-  wearableGenders?: WearableGender[]
+  regions?: Region[]
+  countries?: Country[]
+  kingdoms?: Kingdom[]
+  threatStatus?: ThreatStatus[]
+  sexes?: Sex[]
   search?: string
   contracts?: string[]
   address?: string

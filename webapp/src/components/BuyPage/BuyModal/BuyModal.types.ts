@@ -1,8 +1,7 @@
-import { Wallet } from 'decentraland-dapps/dist/modules/wallet/types'
-import { Authorization } from 'decentraland-dapps/dist/modules/authorization/types'
 import { NFT } from '../../../modules/nft/types'
 import { Order } from '../../../modules/order/types'
-import { executeOrderRequest } from '../../../modules/order/actions'
+import { buyOrderRequest } from '../../../modules/order/actions'
+import { Authorization, Wallet } from '../../../modules/authorization/types'
 
 export type Props = {
   nft: NFT
@@ -11,7 +10,8 @@ export type Props = {
   authorizations: Authorization[]
   isLoading: boolean
   isOwner: boolean
-  hasInsufficientMANA: boolean
+  isOwned: boolean
+  hasInsufficientSPECIES: boolean
   onNavigate: (path: string) => void
-  onExecuteOrder: typeof executeOrderRequest
+  onBuyOrder: typeof buyOrderRequest
 }

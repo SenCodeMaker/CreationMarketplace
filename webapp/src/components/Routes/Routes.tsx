@@ -14,10 +14,8 @@ import { BidPage } from '../BidPage'
 import { CancelSalePage } from '../CancelSalePage'
 import { TransferPage } from '../TransferPage'
 import { ActivityPage } from '../ActivityPage'
-import { PartnersPage } from '../PartnersPage'
 import { HomePage } from '../HomePage'
 import { MyBidsPage } from '../MyBidsPage'
-import { LegacyNFTPage } from '../LegacyNFTPage'
 
 const Routes = () => {
   const APP_ID = process.env.REACT_APP_INTERCOM_APP_ID
@@ -41,11 +39,8 @@ const Routes = () => {
         <Route exact path={locations.transfer()} component={TransferPage} />
         <Route exact path={locations.nft()} component={NFTPage} />
         <Route exact path={locations.settings()} component={SettingsPage} />
-        <Route exact path={locations.partners()} component={PartnersPage} />
         <Route exact path={locations.activity()} component={ActivityPage} />
         <Route exact path={locations.root()} component={HomePage} />
-        <Route exact path={locations.parcel()} component={LegacyNFTPage} />
-        <Route exact path={locations.estate()} component={LegacyNFTPage} />
         <Redirect
           from="/browse"
           to={locations.browse() + window.location.search}

@@ -1,7 +1,6 @@
-import { Authorization } from 'decentraland-dapps/dist/modules/authorization/types'
-import { Wallet } from 'decentraland-dapps/dist/modules/wallet/types'
 import { NFT } from '../../../modules/nft/types'
 import { placeBidRequest } from '../../../modules/bid/actions'
+import { Authorization, Wallet } from '../../../modules/authorization/types'
 
 export type Props = {
   nft: NFT

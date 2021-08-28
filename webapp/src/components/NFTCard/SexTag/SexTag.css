@@ -1,0 +1,32 @@
+.SexTag {
+  display: flex;
+}
+
+.SexTag .icon {
+  margin-left: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  width: 24px;
+  height: 24px;
+  background-color: #37333d;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .WearableTags .icon {
+    display: none;
+  }
+}
+
+.SexTag .icon.sex_male {
+  background-image: url(../../../images/sex_male.svg);
+}
+
+.SexTag .icon.sex_female {
+  background-image: url(../../../images/sex_female.svg);
+}
+
+.SexTag .icon.sex_hermaphrodite {
+  background-image: url(../../../images/sex_hermaphrodite.svg);
+}

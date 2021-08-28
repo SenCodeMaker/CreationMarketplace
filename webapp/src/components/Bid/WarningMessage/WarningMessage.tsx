@@ -1,43 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import { t } from 'decentraland-dapps/dist/modules/translation/utils'
 
-import { useFingerprint } from '../../../modules/nft/hooks'
-import {
-  isInsufficientMANA,
-  checkFingerprint
-} from '../../../modules/bid/utils'
+import { isInsufficientSpecies } from '../../../modules/bid/utils'
 import { Props } from './WarningMessage.types'
 import './WarningMessage.css'
 
 const WarningMessage = (props: Props) => {
   const { nft, bid } = props
 
-  const [fingerprint] = useFingerprint(nft)
-  const [hasInsufficientMANA, setHasInsufficientMANA] = useState(false)
+  const [hasInsufficientSpecies, setHasInsufficientSpecies] = useState(false)
 
   useEffect(() => {
-    isInsufficientMANA(bid)
-      .then(setHasInsufficientMANA)
+    isInsufficientSpecies(bid)
+      .then(setHasInsufficientSpecies)
       .catch(error =>
-        console.error(`Could not get the MANA from bidder ${bid.bidder}`, error)
+        console.error(
+          `Could not get the Species from bidder ${bid.bidder}`,
+          error
+        )
       )
   }, [bid])
 
-  const isValidFingerprint = checkFingerprint(bid, fingerprint)
-
-  if (hasInsufficientMANA) {
+  if (hasInsufficientSpecies) {
     return (
       <div className="WarningMessage">
         {t('bid.not_enough_mana_on_bid_placed')}
       </div>
     )
-  } else if (!isValidFingerprint) {
+  } /*lse if (!isValidFingerprint) {
     return (
       <div className="WarningMessage">
         {t('bid.invalid_fingerprint_on_bid_placed')}
       </div>
     )
-  }
+  }*/
 
   return null
 }

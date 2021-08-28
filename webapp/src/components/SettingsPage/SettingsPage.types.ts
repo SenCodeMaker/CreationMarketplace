@@ -1,14 +1,14 @@
 import { Dispatch } from 'redux'
 import { CallHistoryMethodAction } from 'connected-react-router'
-import { Wallet } from 'decentraland-dapps/dist/modules/wallet/types'
 import { Transaction } from 'decentraland-dapps/dist/modules/transaction/types'
-import { Authorization } from 'decentraland-dapps/dist/modules/authorization/types'
 import {
+  Authorization,
   grantTokenRequest,
   GrantTokenRequestAction,
   revokeTokenRequest,
-  RevokeTokenRequestAction
-} from 'decentraland-dapps/dist/modules/authorization/actions'
+  RevokeTokenRequestAction,
+  Wallet
+} from '../../modules/authorization/types'
 
 export type Props = {
   wallet: Wallet | null

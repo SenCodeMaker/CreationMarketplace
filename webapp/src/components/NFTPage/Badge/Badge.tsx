@@ -3,9 +3,12 @@ import { Props } from './Badge.types'
 import './Badge.css'
 
 const Badge = (props: Props) => {
-  const { color, className = '', children } = props
+  const { color, backgroundColor, className = '', children } = props
   return (
-    <div className={`Badge ${className}`} style={{ backgroundColor: color }}>
+    <div
+      className={`Badge ${className}`}
+      style={{ backgroundColor: backgroundColor, color: color }}
+    >
       {children}
     </div>
   )

@@ -3,7 +3,6 @@ import { getSearch as getRouterSearch } from 'connected-react-router'
 import { Network } from '@dcl/schemas'
 import { getView } from '../ui/nft/browse/selectors'
 import { View } from '../ui/types'
-import { WearableRarity, WearableGender } from '../nft/wearable/types'
 import { VendorName } from '../vendor/types'
 import { isVendor } from '../vendor/utils'
 import { contracts } from '../contract/utils'
@@ -14,6 +13,7 @@ import {
   getURLParam
 } from './search'
 import { SortBy, Section } from './types'
+import { Country, Kingdom, Sex, ThreatStatus } from '../nft/species/types'
 
 export const getState = (state: RootState) => state.routing
 
@@ -24,7 +24,7 @@ export const getVendor = createSelector<RootState, string, VendorName>(
     if (vendor && isVendor(vendor)) {
       return vendor
     }
-    return VendorName.DECENTRALAND
+    return VendorName.SPECIES
   }
 )
 
@@ -102,28 +102,32 @@ export const getIsFullscreen = createSelector<
   return isFullscreen === null ? undefined : isMap && isFullscreen === 'true'
 })
 
-export const getWearableRarities = createSelector<
+export const getThreatStatus = createSelector<
   RootState,
   string,
-  WearableRarity[]
+  ThreatStatus[]
 >(getRouterSearch, search =>
-  getURLParamArray<WearableRarity>(
+  getURLParamArray<ThreatStatus>(
     search,
-    'rarities',
-    Object.values(WearableRarity)
+    'threatstatus',
+    Object.values(ThreatStatus)
   )
 )
 
-export const getWearableGenders = createSelector<
-  RootState,
-  string,
-  WearableGender[]
->(getRouterSearch, search =>
-  getURLParamArray<WearableGender>(
-    search,
-    'genders',
-    Object.values(WearableGender)
-  )
+export const getKingdoms = createSelector<RootState, string, Kingdom[]>(
+  getRouterSearch,
+  search =>
+    getURLParamArray<Kingdom>(search, 'kingdoms', Object.values(Kingdom))
+)
+
+export const getSexes = createSelector<RootState, string, Sex[]>(
+  getRouterSearch,
+  search => getURLParamArray<Sex>(search, 'sexes', Object.values(Sex))
+)
+
+export const getCountries = createSelector<RootState, string, Country[]>(
+  getRouterSearch,
+  search => getURLParamArray<Country>(search, 'countries', Object.values(Country))
 )
 
 export const getContracts = createSelector<RootState, string, string[]>(

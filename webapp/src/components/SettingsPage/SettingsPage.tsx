@@ -4,22 +4,22 @@ import { Network } from '@dcl/schemas'
 import { t } from 'decentraland-dapps/dist/modules/translation/utils'
 import { Footer } from 'decentraland-dapps/dist/containers'
 import { isMobile } from 'decentraland-dapps/dist/lib/utils'
-import { Page, Grid, Blockie, Loader, Form } from 'decentraland-ui'
-import { ContractName } from 'decentraland-transactions'
 
 import { locations } from '../../modules/routing/locations'
 import { shortenAddress } from '../../modules/wallet/utils'
 import { Navbar } from '../Navbar'
 import { Navigation } from '../Navigation'
-import { Mana } from '../Mana'
+import { Species } from '../Species'
 import { Authorization } from './Authorization'
 import { AuthorizationType } from 'decentraland-dapps/dist/modules/authorization/types'
 import { getContractNames } from '../../modules/vendor'
 import { getContract } from '../../modules/contract/utils'
 import { Props } from './SettingsPage.types'
 import './SettingsPage.css'
+import { ContractName } from '../../modules/authorization/types'
+import { Blockie, Form, Grid, Loader, Page } from 'decentraland-ui'
 
-const BUY_MANA_URL = process.env.REACT_APP_BUY_MANA_URL
+const BUY_SPECIES_URL = process.env.REACT_APP_BUY_SPECIES_URL
 
 const SettingsPage = (props: Props) => {
   const {
@@ -66,21 +66,12 @@ const SettingsPage = (props: Props) => {
     network: Network.MATIC
   })
 
-  const marketplaceAdapter = getContract({
-    name: contractNames.MARKETPLACE_ADAPTER
-  })
-
   const bids = getContract({
     name: contractNames.BIDS
   })
 
-  const manaEthereum = getContract({
-    name: contractNames.MANA,
-    network: Network.ETHEREUM
-  })
-
-  const manaMatic = getContract({
-    name: contractNames.MANA,
+  const species = getContract({
+    name: contractNames.SPECIES,
     network: Network.MATIC
   })
 
@@ -141,16 +132,16 @@ const SettingsPage = (props: Props) => {
               </Grid.Column>
               <Grid.Column computer={12} mobile={16}>
                 <div className="balance">
-                  <Mana inline>
+                  <Species inline>
                     {parseInt(
-                      wallet.networks.ETHEREUM.mana.toFixed(0),
+                      wallet.networks.MATIC.species.toFixed(0),
                       10
                     ).toLocaleString()}
-                  </Mana>
-                  {BUY_MANA_URL ? (
+                  </Species>
+                  {BUY_SPECIES_URL ? (
                     <a
                       className="buy-more"
-                      href={BUY_MANA_URL}
+                      href={BUY_SPECIES_URL}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -188,7 +179,7 @@ const SettingsPage = (props: Props) => {
                           <label className="secondary-text">
                             {t('settings_page.for_buying')}
                           </label>
-                          <Authorization
+                          {/* <Authorization
                             authorization={{
                               address: wallet.address,
                               authorizedAddress: marketplaceEthereum.address,
@@ -249,7 +240,7 @@ const SettingsPage = (props: Props) => {
                             authorizations={authorizations}
                             onGrant={onGrant}
                             onRevoke={onRevoke}
-                          />
+                          /> */}
                         </div>
 
                         {authorizationsForSelling.length > 0 ? (

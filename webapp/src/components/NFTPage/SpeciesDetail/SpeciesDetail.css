@@ -1,0 +1,11 @@
+.SpeciesDetail .Badge a {
+  color: var(--text);
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .SpeciesDetail .threatStatus {
+    display: none;
+  }
+}

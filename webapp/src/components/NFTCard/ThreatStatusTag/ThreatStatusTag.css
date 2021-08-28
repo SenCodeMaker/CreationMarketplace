@@ -1,0 +1,72 @@
+.ThreatStatusTag {
+  display: flex;
+}
+
+.ThreatStatusTag .rarity {
+  font-size: 13px;
+  line-height: 18px;
+  text-transform: uppercase;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.ThreatStatusTag .icon {
+  margin-left: 8px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  width: 24px;
+  height: 24px;
+  background-color: #37333d;
+  border-radius: 4px;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .ThreatStatusTag .icon {
+    display: none;
+  }
+}
+
+.ThreatStatusTag .icon.threatStatus_extinct {
+  background-image: url(../../../images/threatStatus_extinct.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_extinct_in_the_wild {
+  background-image: url(../../../images/threatStatus_extinct_in_the_wild.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_regionally_extinct {
+  background-image: url(../../../images/threatStatus_regionally_extinct.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_critically_endangered {
+  background-image: url(../../../images/threatStatus_critically_endangered.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_endangered {
+  background-image: url(../../../images/threatStatus_endangered.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_vulnerable {
+  background-image: url(../../../images/threatStatus_vulnerable.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_near_threatened {
+  background-image: url(../../../images/threatStatus_near_threatened.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_least_concern {
+  background-image: url(../../../images/threatStatus_least_concern.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_data_deficient {
+  background-image: url(../../../images/threatStatus_data_deficient.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_not_applicable {
+  background-image: url(../../../images/threatStatus_not_applicable.svg);
+}
+
+.ThreatStatusTag .icon.threatStatus_not_evaluated {
+  background-image: url(../../../images/threatStatus_not_evaluated.svg);
+}

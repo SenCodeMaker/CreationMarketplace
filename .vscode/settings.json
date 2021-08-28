@@ -5,5 +5,21 @@
   "prettier.semi": false,
   "search.followSymlinks": false,
   "editor.tabSize": 2,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [ 
+    "javascript", 
+    "javascriptreact", 
+    "typescript" ,
+    "typescriptreact"
+],
+"eslint.options": {
+    "extensinons": [".ts", ".js", ".tsx", ".jsx"]
+},
+  "eslint.codeAction.showDocumentation": {
+
+    "enable": true
+  }
 }

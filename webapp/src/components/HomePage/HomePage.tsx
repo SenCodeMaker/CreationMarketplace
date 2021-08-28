@@ -7,7 +7,7 @@ import { VendorName } from '../../modules/vendor/types'
 import { SortBy } from '../../modules/routing/types'
 import { View } from '../../modules/ui/types'
 import { HomepageView } from '../../modules/ui/nft/homepage/types'
-import { Section } from '../../modules/vendor/decentraland/routing/types'
+import { Section } from '../../modules/vendor/species/routing/types'
 import { Navbar } from '../Navbar'
 import { Footer } from '../Footer'
 import { Slideshow } from './Slideshow'
@@ -18,8 +18,15 @@ const HomePage = (props: Props) => {
   const { homepage, homepageLoading, onNavigate, onFetchNFTsFromRoute } = props
 
   const sections = {
-    [View.HOME_WEARABLES]: Section.WEARABLES,
-    [View.HOME_LAND]: Section.LAND,
+    // notre token
+    [View.HOME_ANIMALIA]: Section.ANIMALIA,
+    [View.HOME_ARCHAEA]: Section.ARCHAEA,
+    [View.HOME_PLANTAE]: Section.PLANTAE,
+    [View.HOME_CHROMISTA]: Section.CHROMISTA,
+    [View.HOME_BACTERIA]: Section.BACTERIA,
+    [View.HOME_FUNGI]: Section.FUNGI,
+    [View.HOME_PROTOZOA]: Section.PROTOZOA,
+    [View.HOME_VIRUSES]: Section.VIRUSES,
     [View.HOME_ENS]: Section.ENS
   }
 
@@ -32,7 +39,7 @@ const HomePage = (props: Props) => {
     [onNavigate]
   )
 
-  const vendor = VendorName.DECENTRALAND
+  const vendor = VendorName.SPECIES
 
   useEffect(() => {
     let view: HomepageView

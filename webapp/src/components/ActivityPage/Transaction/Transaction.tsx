@@ -12,7 +12,8 @@ import { getNFTName } from '../../../modules/nft/utils'
 import {
   CREATE_ORDER_SUCCESS,
   CANCEL_ORDER_SUCCESS,
-  EXECUTE_ORDER_SUCCESS
+  EXECUTE_ORDER_SUCCESS,
+  BUY_ORDER_SUCCESS
 } from '../../../modules/order/actions'
 import { TRANSFER_NFT_SUCCESS } from '../../../modules/nft/actions'
 import {
@@ -23,9 +24,9 @@ import {
 import { locations } from '../../../modules/routing/locations'
 import { getContract } from '../../../modules/contract/utils'
 import { NFTProvider } from '../../NFTProvider'
-import { Mana } from '../../Mana'
 import { TransactionDetail } from './TransactionDetail'
 import { Props } from './Transaction.types'
+import { Species } from '../../Species'
 
 const Transaction = (props: Props) => {
   const { tx } = props
@@ -108,10 +109,11 @@ const Transaction = (props: Props) => {
                         {name}
                       </Link>
                     ),
+                    // notre token
                     price: (
-                      <Mana network={network} inline>
+                      <Species network={network} inline>
                         {price.toLocaleString()}
-                      </Mana>
+                      </Species>
                     )
                   }}
                 />
@@ -138,10 +140,11 @@ const Transaction = (props: Props) => {
                         {name}
                       </Link>
                     ),
+                    // notre token
                     price: (
-                      <Mana network={network} inline>
+                      <Species network={network} inline>
                         {price.toLocaleString()}
-                      </Mana>
+                      </Species>
                     )
                   }}
                 />
@@ -168,10 +171,41 @@ const Transaction = (props: Props) => {
                         {name}
                       </Link>
                     ),
+                    // notre token
                     price: (
-                      <Mana network={network} inline>
+                      <Species network={network} inline>
                         {price.toLocaleString()}
-                      </Mana>
+                      </Species>
+                    )
+                  }}
+                />
+              }
+              tx={tx}
+            />
+          )}
+        </NFTProvider>
+      )
+    }
+    case BUY_ORDER_SUCCESS: {
+      const { tokenId, contractAddress, network, name, price } = tx.payload
+      return (
+        <NFTProvider contractAddress={contractAddress} tokenId={tokenId}>
+          {nft => (
+            <TransactionDetail
+              nft={nft}
+              text={
+                <T
+                  id="transaction.detail.execute_order"
+                  values={{
+                    name: (
+                      <Link to={locations.nft(contractAddress, tokenId)}>
+                        {name}
+                      </Link>
+                    ),
+                    price: (
+                      <Species network={network} inline>
+                        {price.toLocaleString()}
+                      </Species>
                     )
                   }}
                 />
@@ -229,7 +263,8 @@ const Transaction = (props: Props) => {
                         {nft ? getNFTName(nft) : ''}
                       </Link>
                     ),
-                    price: <Mana inline>{price.toLocaleString()}</Mana>
+                    price: <Species inline>{price.toLocaleString()}</Species>
+                    // notre token
                   }}
                 />
               }
@@ -255,7 +290,8 @@ const Transaction = (props: Props) => {
                         {nft ? getNFTName(nft) : ''}
                       </Link>
                     ),
-                    price: <Mana inline>{price.toLocaleString()}</Mana>
+                    price: <Species inline>{price.toLocaleString()}</Species>
+                    // notre token
                   }}
                 />
               }
@@ -281,7 +317,8 @@ const Transaction = (props: Props) => {
                         {nft ? getNFTName(nft) : ''}
                       </Link>
                     ),
-                    price: <Mana inline>{price.toLocaleString()}</Mana>
+                    price: <Species inline>{price.toLocaleString()}</Species>
+                    // notre token
                   }}
                 />
               }

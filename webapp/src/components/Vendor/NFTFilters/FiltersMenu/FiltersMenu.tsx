@@ -1,27 +1,37 @@
 import React, { useMemo } from 'react'
 import { t } from 'decentraland-dapps/dist/modules/translation/utils'
 import { Row } from 'decentraland-ui'
-import {
-  WearableRarity,
-  WearableGender
-} from '../../../../modules/nft/wearable/types'
 import { ArrayFilter } from '../ArrayFilter'
 import { SelectFilter } from '../SelectFilter'
 import { Props } from './FiltersMenu.types'
 import { Network } from '@dcl/schemas'
 import { contracts } from '../../../../modules/contract/utils'
+import {
+  Country,
+  COUNTRY_NAME,
+  Kingdom,
+  Region,
+  Sex,
+  ThreatStatus
+} from '../../../../modules/nft/species/types'
 
 export const ALL_FILTER_OPTION = 'ALL'
 
 const FiltersMenu = (props: Props) => {
   const {
     selectedCollection,
-    selectedRarities,
-    selectedGenders,
+    selectedSexes,
+    selectedKingdoms,
+    selectedRegions,
+    selectedCountries,
+    selectedThreatStatus,
     selectedNetwork,
     onCollectionsChange,
-    onRaritiesChange,
-    onGendersChange,
+    onThreatStatusChange,
+    onCountryChange,
+    onRegionChange,
+    onSexChange,
+    onKingdomChange,
     onNetworkChange
   } = props
 
@@ -38,21 +48,49 @@ const FiltersMenu = (props: Props) => {
     ]
   }, [])
 
-  const rarityOptions = useMemo(() => {
-    const options = Object.values(WearableRarity)
-      .filter(x => x !== WearableRarity.COMMON && x !== WearableRarity.UNIQUE)
-      .reverse()
-    return options.map(rarity => ({
-      value: rarity,
-      text: t(`wearable.rarity.${rarity}`)
+  const sexOptions = useMemo(() => {
+    const options = Object.values(Sex)
+    return options.map(sex => ({
+      value: sex,
+      text: t(`sex.${sex.toLocaleLowerCase()}`)
     }))
   }, [])
 
-  const genderOptions = useMemo(() => {
-    const options = Object.values(WearableGender)
-    return options.map(gender => ({
-      value: gender,
-      text: t(`wearable.body_shape.${gender}`)
+  const kingdomOptions = useMemo(() => {
+    const options = Object.values(Kingdom)
+    return options.map(kingdom => ({
+      value: kingdom,
+      text: t(`kingdom.${kingdom.toLocaleLowerCase()}`)
+    }))
+  }, [])
+
+  const regionOptions = useMemo(() => {
+    const options = Object.values(Region)
+    return options.map(region => ({
+      value: region,
+      text: t(`region.${region.toLocaleLowerCase()}`)
+    }))
+  }, [])
+
+  const countryOptions = useMemo(() => {
+    const options = Object.values(Country)
+    return options.map(country => ({
+      value: country,
+      text: COUNTRY_NAME[country]
+    }))
+  }, [])
+
+  const onCountryChangeOneValue: (option: string) => void = function(
+    option: string
+  ) {
+    onCountryChange([option])
+  }
+
+  const threatStatusOptions = useMemo(() => {
+    const options = Object.values(ThreatStatus)
+    return options.map(threatStatus => ({
+      value: threatStatus,
+      text: t(`threatStatus.${threatStatus.toLocaleLowerCase()}`)
     }))
   }, [])
 
@@ -89,17 +127,39 @@ const FiltersMenu = (props: Props) => {
         />
       </Row>
       <Row>
-        <ArrayFilter
-          name={t('nft_filters.rarity')}
-          values={selectedRarities}
-          options={rarityOptions}
-          onChange={onRaritiesChange}
+        <SelectFilter
+          name={t('nft_filters.country')}
+          value={selectedCountries[0] || ALL_FILTER_OPTION}
+          options={countryOptions}
+          onChange={onCountryChangeOneValue}
         />
         <ArrayFilter
-          name={t('nft_filters.gender')}
-          values={selectedGenders}
-          options={genderOptions}
-          onChange={onGendersChange}
+          name={t('nft_filters.region')}
+          values={selectedRegions}
+          options={regionOptions}
+          onChange={onRegionChange}
+        />
+      </Row>
+      <Row>
+        <ArrayFilter
+          name={t('nft_filters.threatStatus')}
+          values={selectedThreatStatus}
+          options={threatStatusOptions}
+          onChange={onThreatStatusChange}
+        />
+      </Row>
+      <Row>
+        {/* <ArrayFilter
+          name={t('nft_filters.kingdom')}
+          values={selectedKingdoms}
+          options={kingdomOptions}
+          onChange={onKingdomChange}
+        /> */}
+        <ArrayFilter
+          name={t('nft_filters.sex')}
+          values={selectedSexes}
+          options={sexOptions}
+          onChange={onSexChange}
         />
       </Row>
     </>
@@ -107,8 +167,9 @@ const FiltersMenu = (props: Props) => {
 }
 
 FiltersMenu.defaultValues = {
-  selectedRarities: [],
-  selectedGenders: []
+  selectedSexes: [],
+  selectedKingdoms: [],
+  selectedThreadStatus: []
 }
 
 export default React.memo(FiltersMenu)

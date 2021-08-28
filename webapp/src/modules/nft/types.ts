@@ -1,49 +1,37 @@
-import { ChainId, Network } from '@dcl/schemas'
-import { Parcel } from './parcel/types'
-import { Estate } from './estate/types'
-import { Wearable } from './wearable/types'
-import { ENS } from './ens/types'
+import { ChainId } from '@dcl/schemas'
 import { View } from '../ui/types'
 import { NFTsFetchFilters } from '../vendor/nft/types'
 import { VendorName } from '../vendor/types'
 import { SortDirection } from '../routing/types'
+import { SpeciesNFT } from './species/types'
+import { Network } from '../contract/types'
 
 export enum NFTSortBy {
   NAME = 'name',
-  CREATED_AT = 'createdAt',
-  ORDER_CREATED_AT = 'searchOrderCreatedAt',
-  PRICE = 'searchOrderPrice'
+  DISCOVERED_AT = 'discoveredAt',
+  COUNTRY = 'country',
+  KINGDOM = 'kingdom',
+  ORDER_CREATED_AT = 'createdAt',
+  PRICE = 'price',
+  ThreatStatus = 'threatStatus',
+  Sex = 'sex'
 }
 
 export enum NFTCategory {
-  PARCEL = 'parcel',
-  ESTATE = 'estate',
-  WEARABLE = 'wearable',
-  ENS = 'ens',
-  ART = 'art'
+  ANIMALIA = 'ANIMALIA',
+  ARCHAEA = 'ARCHAEA',
+  BACTERIA = 'BACTERIA',
+  PLANTAE = 'PLANTAE',
+  PROTOZOA = 'PROTOZOA',
+  FUNGI = 'FUNGI',
+  CHROMISTA = 'CHROMISTA',
+  VIRUSES = 'VIRUSES',
+  ENS = 'ENS',
+  ART = 'ART'
 }
 
-// TODO: Move this to their own vendor folders
-export type DecentralandNFT = {
-  parcel?: Parcel
-  estate?: Estate
-  wearable?: Wearable
-  ens?: ENS
-}
-export type SuperRareNFT = { description: string }
-export type MakersPlaceNFT = { description: string }
-export type KnownOriginNFT = { description: string; isEdition: boolean }
-
-export type Data<V extends VendorName> = V extends VendorName.DECENTRALAND
-  ? DecentralandNFT
-  : V extends VendorName.SUPER_RARE
-  ? SuperRareNFT
-  : V extends VendorName.MAKERS_PLACE
-  ? MakersPlaceNFT
-  : V extends VendorName.KNOWN_ORIGIN
-  ? KnownOriginNFT
-  : V extends void
-  ? DecentralandNFT | SuperRareNFT | MakersPlaceNFT | KnownOriginNFT
+export type Data<V extends VendorName> = V extends VendorName.SPECIES
+  ? SpeciesNFT
   : never
 
 export type NFT<V extends VendorName = any> = {
@@ -63,8 +51,8 @@ export type NFT<V extends VendorName = any> = {
 }
 
 export type NFTsFetchParams = {
-  first: number
-  skip: number
+  fetchSize: number
+  offset: number
   orderBy?: NFTSortBy
   orderDirection?: SortDirection
   category?: NFTCategory
@@ -73,7 +61,7 @@ export type NFTsFetchParams = {
   search?: string
 }
 
-export type NFTsCountParams = Omit<NFTsFetchParams, 'first' | 'skip'>
+export type NFTsCountParams = Omit<NFTsFetchParams, 'fetchSize' | 'offset'>
 
 export type NFTsFetchOptions = {
   vendor: VendorName

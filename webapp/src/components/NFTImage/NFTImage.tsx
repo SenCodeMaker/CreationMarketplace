@@ -1,79 +1,54 @@
 import React, { useMemo } from 'react'
 import { Loader } from 'decentraland-ui'
 import { LazyImage } from 'react-lazy-images'
-
-import { getSelection, getCenter } from '../../modules/nft/estate/utils'
-import {
-  RARITY_COLOR,
-  RARITY_COLOR_LIGHT
-} from '../../modules/nft/wearable/types'
 import { NFT, NFTCategory } from '../../modules/nft/types'
-import { VendorName } from '../../modules/vendor/types'
+import {
+  THREATSTATUS_BACKGROUND_COLOR,
+  THREATSTATUS_BACKGROUND_COLOR_LIGHT
+} from '../../modules/nft/species/types'
 import { getNFTName } from '../../modules/nft/utils'
-import { Atlas } from '../Atlas'
 import { Props } from './NFTImage.types'
 import './NFTImage.css'
+import { VendorName } from '../../modules/vendor'
 
 // 1x1 transparent pixel
 const PIXEL =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGNiYAAAAAkAAxkR2eQAAAAASUVORK5CYII='
 
 const NFTImage = (props: Props) => {
-  const {
-    nft,
-    isDraggable,
-    withNavigation,
-    hasPopup,
-    zoom,
-    isSmall,
-    showMonospace
-  } = props
-  const { parcel, estate, wearable, ens } = (nft as NFT<
-    VendorName.DECENTRALAND
+  const { nft } = props
+
+  const { threatStatus } = (nft as NFT<
+    VendorName.SPECIES // TODO send data from java
   >).data
 
-  const estateSelection = useMemo(() => (estate ? getSelection(estate) : []), [
-    estate
-  ])
-
   switch (nft.category) {
-    case NFTCategory.PARCEL: {
-      const x = +parcel!.x
-      const y = +parcel!.y
-      const selection = [{ x, y }]
-      return (
-        <Atlas
-          x={x}
-          y={y}
-          isDraggable={isDraggable}
-          withPopup={hasPopup}
-          withNavigation={withNavigation}
-          selection={selection}
-          zoom={zoom}
-        />
-      )
-    }
+    // case NFTCategory.ENS: {
+    //   let name = ens!.subdomain
+    //   let classes = ['ens-subdomain']
+    //   if (isSmall) {
+    //     name = name.slice(0, 2)
+    //     classes.push('small')
+    //   }
+    //   return (
+    //     <div className={classes.join(' ')}>
+    //       <div className="name">{name}</div>
+    //       {showMonospace ? <div className="monospace">{name}</div> : null}
+    //     </div>
+    //   )
+    // }
 
-    case NFTCategory.ESTATE: {
-      const [x, y] = getCenter(estateSelection)
-      return (
-        <Atlas
-          x={x}
-          y={y}
-          isDraggable={isDraggable}
-          withPopup={hasPopup}
-          withNavigation={withNavigation}
-          selection={estateSelection}
-          zoom={zoom}
-          isEstate
-        />
-      )
-    }
-
-    case NFTCategory.WEARABLE: {
+    case NFTCategory.ANIMALIA:
+    case NFTCategory.ARCHAEA:
+    case NFTCategory.BACTERIA:
+    case NFTCategory.CHROMISTA:
+    case NFTCategory.FUNGI:
+    case NFTCategory.PLANTAE:
+    case NFTCategory.PROTOZOA:
+    case NFTCategory.VIRUSES: {
       const backgroundImage = `radial-gradient(${
-        RARITY_COLOR_LIGHT[wearable!.rarity]
-      }, ${RARITY_COLOR[wearable!.rarity]})`
+        THREATSTATUS_BACKGROUND_COLOR[threatStatus!]
+      }, ${THREATSTATUS_BACKGROUND_COLOR_LIGHT[threatStatus!]})`
       return (
         <div
           className="rarity-background"
@@ -81,22 +56,11 @@ const NFTImage = (props: Props) => {
             backgroundImage
           }}
         >
-          <img alt={getNFTName(nft)} className="image" src={nft.image} />
-        </div>
-      )
-    }
-
-    case NFTCategory.ENS: {
-      let name = ens!.subdomain
-      let classes = ['ens-subdomain']
-      if (isSmall) {
-        name = name.slice(0, 2)
-        classes.push('small')
-      }
-      return (
-        <div className={classes.join(' ')}>
-          <div className="name">{name}</div>
-          {showMonospace ? <div className="monospace">{name}</div> : null}
+          <img
+            alt={getNFTName(nft) as string}
+            className="image"
+            src={nft.data.image?.url}
+          />
         </div>
       )
     }
@@ -105,7 +69,7 @@ const NFTImage = (props: Props) => {
       return (
         <LazyImage
           src={nft.image}
-          alt={getNFTName(nft)}
+          alt={getNFTName(nft) as string}
           debounceDurationMs={1000}
           placeholder={({ ref }) => (
             <div ref={ref}>
@@ -113,7 +77,11 @@ const NFTImage = (props: Props) => {
             </div>
           )}
           actual={({ imageProps }) => (
-            <img className="image" alt={getNFTName(nft)} {...imageProps} />
+            <img
+              className="image"
+              alt={getNFTName(nft) as string}
+              {...imageProps}
+            />
           )}
         />
       )

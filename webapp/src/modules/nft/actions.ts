@@ -14,9 +14,9 @@ export const FETCH_NFTS_SUCCESS = '[Success] Fetch NFTs'
 export const FETCH_NFTS_FAILURE = '[Failure] Fetch NFTs'
 
 export const DEFAULT_BASE_NFT_PARAMS: NFTsFetchParams = {
-  first: 24,
-  skip: 0,
-  orderBy: NFTSortBy.CREATED_AT,
+  fetchSize: 24,
+  offset: 0,
+  orderBy: NFTSortBy.DISCOVERED_AT,
   orderDirection: SortDirection.DESC,
   onlyOnSale: false
 }

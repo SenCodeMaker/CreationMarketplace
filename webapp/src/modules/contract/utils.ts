@@ -10,12 +10,11 @@ export async function buildContracts() {
   for (const vendor of vendors) {
     const { contractService } = vendor
 
-    await contractService.build()
+    // await contractService.build()
 
     contracts = [...contracts, ...contractService.getContracts()]
   }
 }
-
 export function getContract(query: Partial<Contract>): Contract {
   const found = contracts.find(contract =>
     Object.keys(query).every(

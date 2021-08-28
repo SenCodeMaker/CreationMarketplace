@@ -2,5 +2,15 @@ import { createTranslationSaga } from 'decentraland-dapps/dist/modules/translati
 import * as translations from './locales'
 
 export const translationSaga = createTranslationSaga({
-  translations
+  getTranslation: locale => {
+    switch (locale) {
+      case 'es':
+        return translations.es
+      case 'zh':
+        return translations.zh
+      case 'en':
+      default:
+        return translations.en
+    }
+  },
 })

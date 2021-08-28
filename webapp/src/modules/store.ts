@@ -10,7 +10,6 @@ import { CLEAR_TRANSACTIONS } from 'decentraland-dapps/dist/modules/transaction/
 
 import { createRootReducer, RootState } from './reducer'
 import { rootSaga } from './sagas'
-import { fetchTilesRequest } from './tile/actions'
 import { ARCHIVE_BID, UNARCHIVE_BID } from './bid/actions'
 
 export const history = require('history').createBrowserHistory()
@@ -23,7 +22,7 @@ export function initStore() {
     isDev && anyWindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? anyWindow.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
           stateSanitizer: (state: RootState) => {
-            const { tile, proximity, ...sanitized } = { ...state }
+            const { ...sanitized } = { ...state }
             return sanitized
           }
         })
@@ -38,7 +37,7 @@ export function initStore() {
   })
   const transactionMiddleware = createTransactionMiddleware()
   const { storageMiddleware, loadStorageMiddleware } = createStorageMiddleware({
-    storageKey: 'marketplace-v2', // this is the key used to save the state in localStorage (required)
+    storageKey: 'marketplace', // this is the key used to save the state in localStorage (required)
     paths: [['ui', 'archivedBidIds']], // array of paths from state to be persisted (optional)
     actions: [CLEAR_TRANSACTIONS, ARCHIVE_BID, UNARCHIVE_BID], // array of actions types that will trigger a SAVE (optional)
     migrations: {} // migration object that will migrate your localstorage (optional)
@@ -65,9 +64,6 @@ export function initStore() {
     const _window = window as any
     _window.getState = store.getState
   }
-
-  // fetch tiles
-  store.dispatch(fetchTilesRequest())
 
   return store
 }

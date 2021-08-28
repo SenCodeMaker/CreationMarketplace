@@ -1,4 +1,4 @@
-import { Authorization } from 'decentraland-dapps/dist/modules/authorization/types'
+import { Authorization } from '../../../modules/authorization/types'
 
 export function isAuthorized(
   authorization: Authorization,
@@ -8,9 +8,9 @@ export function isAuthorized(
     a =>
       a.address.toLocaleLowerCase() === authorization.address.toLowerCase() &&
       a.authorizedAddress.toLowerCase() ===
-        authorization.authorizedAddress.toLowerCase() &&
+      authorization.authorizedAddress.toLowerCase() &&
       a.contractAddress.toLowerCase() ===
-        authorization.contractAddress.toLowerCase() &&
+      authorization.contractAddress.toLowerCase() &&
       a.chainId === authorization.chainId &&
       a.type === authorization.type
   )
